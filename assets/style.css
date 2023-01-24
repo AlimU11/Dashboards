@@ -26,18 +26,9 @@ body {
     display: grid;
 }
 
-.main-grid > .card,
-.kpi-container > .card,
-.genre-container > .card {
-    margin: 0.5rem;
-    border-radius: 15px;
-    box-shadow: 0 0 5px 0 rgb(0 0 0 / 10%);
-}
-
 .projects-container {
     margin: 5rem -1rem 0;
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
 }
 
@@ -46,6 +37,13 @@ body {
     height: 25rem;
     margin: 1rem;
 }
+
+.projects-container > .card > .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 
 /* SIDEBAR */
 
@@ -86,248 +84,34 @@ body {
 }
 
 .sidebar a:hover:has(.fa-gamepad) {
-    color: #636EFA;
+    color: #636efa;
 }
 
-/* VIDEO GAME SALES */
-
-.input-group-text {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+.sidebar a:hover:has(.fa-people-group) {
+    color: #00CC96;
 }
 
-.Select-control, .form-control {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
+/* MARKET PRICES
 
-.filter-container {
-    display: grid;
-    grid-template-columns: min-content 1fr min-content;
-    align-items: baseline;
-    padding: 0.5rem 2rem !important;
-}
+TODO: uncomment when done
 
-.filter-container > div {
-    padding: 0 0.5rem;
-    margin-top: 1rem;
-}
-
-.filter-container > div:nth-child(2) {
+.main-grid--market-prices > div:nth-child(1) {
     grid-row: 1;
-    grid-column: 2;
-    flex-wrap: nowrap;
-    margin-left: 2rem;
-}
-
-.filter-container > div:nth-child(3) {
-    grid-row: 1;
-    grid-column: 3;
-    min-width: 150px;
-    flex-wrap: nowrap;
-    margin-left: 2rem;
-}
-
-#videogame_sales_years_range {
-    width: 100%;
-}
-
-#videogame_sales_region {
-    min-width: 190px;
-}
-
-#videogame_sales_region > .Select,
-#videogame_sales_region > .Select > .Select-control {
-    height: 100%;
-}
-
-#videogame_sales_region > .Select > .Select-control {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-.main-grid--video-game-sales > div:nth-child(1) {
-    grid-row: 1;
-    grid-column: 1/5;
-    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
-}
-
-.kpi-container {
-    grid-row: 2;
-    display: flex;
-    justify-content: space-between;
-}
-
-.main-grid--video-game-sales > .card > .card-body {
-    padding: 2rem;
-}
-
-.main-grid--video-game-sales > div:nth-child(2) {
-    grid-column: 1/2;
-}
-
-.main-grid--video-game-sales > div:nth-child(3) {
-    grid-column: 2/4;
-}
-
-.kpi-container > div {
-    width: 100%;
-}
-
-.kpi-container > .card > .card-body {
-    padding: 2rem;
-}
-
-.kpi-container > .card > .card-body > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 100%;
-}
-
-.genre-container {
-    grid-row: 3;
-    display: flex;
-    justify-content: space-between;
-}
-
-.genre-container > .card {
-    width: 6.5vw;
-    text-align: center;
-}
-
-.genre-container > .card > .card-body {
-    padding: 0.5rem 0.5rem 0rem;
-}
-
-.genre-container > .card > .card-body > div {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr min-content;
-    height: 100%;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.genre-container > .card > .card-body > div > .card-title {
-    display: grid;
-    grid-template-rows: 1fr min-content;
-    height: 80%;
-    font-size: 1.3rem;
-}
-
-.genre-container > .card > .card-body > div > h6 {
-    word-break: break-word;
-}
-
-.main-grid--video-game-sales > div:nth-child(4) {
-    grid-row: 3;
-    grid-column: 1/2;
-}
-
-.main-grid--video-game-sales > div:nth-child(5) {
-    grid-row: 3;
-    grid-column: 2/4;
-}
-
-.main-grid--video-game-sales > div:nth-child(6) > .card-body,
-.main-grid--video-game-sales > div:nth-child(7) > .card-body,
-.main-grid--video-game-sales > div:nth-child(8) > .card-body,
-.main-grid--video-game-sales > div:nth-child(9) > .card-body,
-.main-grid--video-game-sales > div:nth-child(10) > .card-body,
-.main-grid--video-game-sales > div:nth-child(11) > .card-body,
-.main-grid--video-game-sales > div:nth-child(12) > .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.main-grid--video-game-sales > div:nth-child(6) {
-    grid-row: 4;
-    grid-column: 1/2;
-}
-
-#videogame_sales_by_publisher {
-    width: 40vw;
-}
-
-.input-group:has(#videogame_sales_top_n_publishers),
-.input-group:has(#videogame_sales_top_n_games) {
-    margin: 1rem 0;
-    width: 50%;
-}
-
-#videogame_sales_top_n_publishers {
-    width: 100px !important;
-}
-
-.main-grid--video-game-sales > div:nth-child(7) {
-    grid-row: 4;
-    grid-column: 2/4;
-}
-
-#videogame_sales_by_genre {
-    width: 40vw;
-}
-
-.main-grid--video-game-sales > div:nth-child(8) {
-    grid-row: 5;
-    grid-column: 1/2;
-}
-
-#videogame_sales_top_games {
-    width: 40vw;
-}
-
-.main-grid--video-game-sales > div:nth-child(9) {
-    grid-row: 5;
-    grid-column: 2/4;
-}
-
-#videogame_sales_genre_by_year {
-    width: 40vw;
-}
-
-.main-grid--video-game-sales > div:nth-child(10) {
-    grid-row: 6;
-    grid-column: 1/2;
-}
-
-#videogame_sales_genre_by_platform {
-    width: 40vw;
-}
-
-.main-grid--video-game-sales > div:nth-child(11) {
-    grid-row: 6;
-    grid-column: 2/4;
-}
-
-#videogame_sales_rank_by_year {
-    width: 40vw;
-}
-
-.main-grid--video-game-sales > div:nth-child(12) {
-    grid-row: 7;
     grid-column: 1/4;
 }
 
-#videogame_sales_amount_description,
-#videogame_sales_top_game_description,
-#videogame_sales_top_freq_platform_description,
-#videogame_sales_trending_genre_description {
-    font-size: 1.3rem;
+.main-grid--market-prices > div:nth-child(2) {
+    grid-row: 2;
+    grid-column: 1/4;
 }
 
-#videogame_sales_trending_genre_title > i:first-child {
-    margin-right: 1rem;
+.main-grid--market-prices > div:nth-child(3) {
+    grid-row: 3;
+    grid-column: 1/4;
 }
 
-#videogame_sales_trending_genre_title > i:last-child {
-    margin-left: 1rem;
-    color: #00CC96;
+.main-grid--market-prices > div:nth-child(4) {
+    grid-row: 4;
 }
 
-#videogame_sales_trending_genre_title > span {
-    color: #00CC96;
-}
+ */

@@ -1,12 +1,7 @@
-import os
-
 import pandas as pd
-import yaml
+from pandas import DataFrame
 
-with open('global_config.yaml', 'r') as f:
-    config = yaml.safe_load(f)
-    for key, value in config.items():
-        os.environ[key] = str(value)
+from .Config import config
 
 
 class AppData:
@@ -19,13 +14,34 @@ class AppData:
             'years_range': None,
         }
 
+        self.__hr_analytics: dict = {
+            'data': None,
+            'attrition': None,
+            'education': None,
+            'education_list': None,
+        }
+
         self.read_data()
         self.videogame_sales_update()
 
     def read_data(self):
-        self.__videogame_sales['data'] = pd.read_csv(os.environ.get('VIDEOGAME_SALES_DATA_PATH'))
-        self.__videogame_sales['top_n_publishers'] = int(os.environ.get('VIDEOGAME_SALES_TOP_N_PUBLISHERS_DEFAULT'))
-        self.__videogame_sales['top_n_games'] = int(os.environ.get('VIDEOGAME_SALES_TOP_N_GAMES_DEFAULT'))
+        self.__videogame_sales['data'] = pd.read_csv(
+            config.videogame_sales_data_path,
+        )
+        self.__videogame_sales['top_n_publishers'] = int(
+            config.videogame_sales_top_n_publishers_default,
+        )
+        self.__videogame_sales['top_n_games'] = int(
+            config.videogame_sales_top_n_games_default,
+        )
+
+        self.__hr_analytics['data'] = pd.read_csv(
+            config.hr_analytics_data_path,
+        )
+        self.__hr_analytics['attrition'] = self.__hr_analytics['data'].query(
+            'Attrition == "Yes"',
+        )
+        self.__hr_analytics['education_list'] = self.__hr_analytics['data'].Education.unique()
 
     def videogame_sales_update(self):
         columns = ['Name', 'Platform', 'Year', 'Genre', 'Publisher']
@@ -55,6 +71,38 @@ class AppData:
     @videogame_sales.setter
     def videogame_sales(self, value: dict) -> None:
         self.__videogame_sales = value
+
+    @property
+    def hr_analytics(self) -> dict:
+        return self.__hr_analytics
+
+    @property
+    def hr_analytics_data(self) -> DataFrame:
+        return self.__hr_analytics['data'][
+            self.__hr_analytics['data'].Education.isin(
+                [self.__hr_analytics['education']]
+                if self.__hr_analytics['education'] != 'All'
+                else self.__hr_analytics['education_list'],
+            )
+        ]
+
+    @property
+    def hr_attrition(self) -> DataFrame:
+        return self.__hr_analytics['attrition'][
+            self.__hr_analytics['attrition'].Education.isin(
+                [self.__hr_analytics['education']]
+                if self.__hr_analytics['education'] != 'All'
+                else self.__hr_analytics['education_list'],
+            )
+        ]
+
+    @property
+    def hr_education(self) -> list:
+        return self.__hr_analytics['data']['Education'].unique().tolist()
+
+    @hr_analytics.setter
+    def hr_analytics(self, value: dict) -> None:
+        self.__hr_analytics = value
 
 
 app_data = AppData()

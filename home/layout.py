@@ -1,20 +1,25 @@
 import dash_bootstrap_components as dbc
 from dash import html
 
+from utils.Config import config
+from utils.LayoutBuilder import LayoutBuilder as lb
+from utils.PreviewGraphs import preview_graphs as pg
+
 layout = html.Div(
     children=[
         html.H1(children='This is our Home page'),
         html.Div(
             children=[
-                dbc.Card(
-                    dbc.CardBody(
-                        [
-                            html.H4('Video Game Sales', className='card-title'),
-                            html.P('This is some card text', className='card-text'),
-                            dbc.Button('Explore', href='/videogame-sales', color='primary'),
-                        ],
-                    ),
-                ),
+                *[
+                    lb.project_card(
+                        title=project.name,
+                        fig=project.fig,
+                        description=project.description,
+                        button_text=project.button_text,
+                        icon=project.icon,
+                    )
+                    for project in config.projects
+                ],
             ],
             className='projects-container',
         ),

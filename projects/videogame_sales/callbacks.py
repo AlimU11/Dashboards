@@ -38,84 +38,86 @@ def update_app_data(years_range, region, top_n_publishers, top_n_games):
     app_data.videogame_sales['region'] = region or app_data.videogame_sales['region']
 
 
+# TODO refactor callback, separate into smaller callbacks
+# TODO add utils, make callbacks effectively empty
 @callback(
     [
         # Parameters
-        Output(IdHolder.videogame_sales_years_range.name, 'value'),
-        Output(IdHolder.videogame_sales_region.name, 'value'),
-        Output(IdHolder.videogame_sales_top_n_publishers.name, 'value'),
-        Output(IdHolder.videogame_sales_top_n_games.name, 'value'),
+        Output(IdHolder.vg_years_range.name, 'value'),
+        Output(IdHolder.vg_region.name, 'value'),
+        Output(IdHolder.vg_top_n_publishers.name, 'value'),
+        Output(IdHolder.vg_top_n_games.name, 'value'),
         # Graphs
-        Output(IdHolder.videogame_sales_by_publisher.name, 'figure'),
-        Output(IdHolder.videogame_sales_top_games.name, 'figure'),
-        Output(IdHolder.videogame_sales_by_genre.name, 'figure'),
-        Output(IdHolder.videogame_sales_genre_by_year.name, 'figure'),
-        Output(IdHolder.videogame_sales_genre_by_platform.name, 'figure'),
-        Output(IdHolder.videogame_sales_region_platform_genre.name, 'figure'),
-        Output(IdHolder.videogame_sales_rank_by_year.name, 'figure'),
+        Output(IdHolder.vg_by_publisher.name, 'figure'),
+        Output(IdHolder.vg_top_games.name, 'figure'),
+        Output(IdHolder.vg_by_genre.name, 'figure'),
+        Output(IdHolder.vg_genre_by_year.name, 'figure'),
+        Output(IdHolder.vg_genre_by_platform.name, 'figure'),
+        Output(IdHolder.vg_region_platform_genre.name, 'figure'),
+        Output(IdHolder.vg_rank_by_year.name, 'figure'),
         # KPIs
-        Output(IdHolder.videogame_sales_amount_title.name, 'children'),
-        Output(IdHolder.videogame_sales_top_game_title.name, 'children'),
-        Output(IdHolder.videogame_sales_top_freq_platform_title.name, 'children'),
-        Output(IdHolder.videogame_sales_trending_genre_title.name, 'children'),
+        Output(IdHolder.vg_sales_amount_title.name, 'children'),
+        Output(IdHolder.vg_top_game_title.name, 'children'),
+        Output(IdHolder.vg_top_freq_platform_title.name, 'children'),
+        Output(IdHolder.vg_trending_genre_title.name, 'children'),
         # KPIs Description
-        Output(IdHolder.videogame_sales_amount_description.name, 'children'),
-        Output(IdHolder.videogame_sales_top_game_description.name, 'children'),
-        Output(IdHolder.videogame_sales_top_freq_platform_description.name, 'children'),
-        Output(IdHolder.videogame_sales_trending_genre_description.name, 'children'),
+        Output(IdHolder.vg_sales_amount_description.name, 'children'),
+        Output(IdHolder.vg_top_game_description.name, 'children'),
+        Output(IdHolder.vg_top_freq_platform_description.name, 'children'),
+        Output(IdHolder.vg_trending_genre_description.name, 'children'),
         # Genre Title
-        Output(IdHolder.videogame_sales_genre_1_title.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_2_title.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_3_title.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_4_title.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_5_title.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_6_title.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_7_title.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_8_title.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_9_title.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_10_title.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_11_title.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_12_title.name, 'children'),
+        Output(IdHolder.vg_genre_1_title.name, 'children'),
+        Output(IdHolder.vg_genre_2_title.name, 'children'),
+        Output(IdHolder.vg_genre_3_title.name, 'children'),
+        Output(IdHolder.vg_genre_4_title.name, 'children'),
+        Output(IdHolder.vg_genre_5_title.name, 'children'),
+        Output(IdHolder.vg_genre_6_title.name, 'children'),
+        Output(IdHolder.vg_genre_7_title.name, 'children'),
+        Output(IdHolder.vg_genre_8_title.name, 'children'),
+        Output(IdHolder.vg_genre_9_title.name, 'children'),
+        Output(IdHolder.vg_genre_10_title.name, 'children'),
+        Output(IdHolder.vg_genre_11_title.name, 'children'),
+        Output(IdHolder.vg_genre_12_title.name, 'children'),
         # Genres
-        Output(IdHolder.videogame_sales_genre_1.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_2.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_3.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_4.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_5.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_6.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_7.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_8.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_9.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_10.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_11.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_12.name, 'children'),
+        Output(IdHolder.vg_genre_1.name, 'children'),
+        Output(IdHolder.vg_genre_2.name, 'children'),
+        Output(IdHolder.vg_genre_3.name, 'children'),
+        Output(IdHolder.vg_genre_4.name, 'children'),
+        Output(IdHolder.vg_genre_5.name, 'children'),
+        Output(IdHolder.vg_genre_6.name, 'children'),
+        Output(IdHolder.vg_genre_7.name, 'children'),
+        Output(IdHolder.vg_genre_8.name, 'children'),
+        Output(IdHolder.vg_genre_9.name, 'children'),
+        Output(IdHolder.vg_genre_10.name, 'children'),
+        Output(IdHolder.vg_genre_11.name, 'children'),
+        Output(IdHolder.vg_genre_12.name, 'children'),
         # Titles
-        Output(IdHolder.videogame_sales_by_publisher_title.name, 'children'),
-        Output(IdHolder.videogame_sales_by_genre_title.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_by_year_title.name, 'children'),
-        Output(IdHolder.videogame_sales_genre_by_platform_title.name, 'children'),
-        Output(IdHolder.videogame_sales_rank_by_year_title.name, 'children'),
-        Output(IdHolder.videogame_sales_top_games_title.name, 'children'),
+        Output(IdHolder.vg_by_publisher_title.name, 'children'),
+        Output(IdHolder.vg_by_genre_title.name, 'children'),
+        Output(IdHolder.vg_genre_by_year_title.name, 'children'),
+        Output(IdHolder.vg_genre_by_platform_title.name, 'children'),
+        Output(IdHolder.vg_rank_by_year_title.name, 'children'),
+        Output(IdHolder.vg_top_games_title.name, 'children'),
     ],
     [
-        Input(IdHolder.videogame_sales_years_range.name, 'value'),
-        Input(IdHolder.videogame_sales_region.name, 'value'),
-        Input(IdHolder.videogame_sales_top_n_publishers.name, 'value'),
-        Input(IdHolder.videogame_sales_top_n_games.name, 'value'),
+        Input(IdHolder.vg_years_range.name, 'value'),
+        Input(IdHolder.vg_region.name, 'value'),
+        Input(IdHolder.vg_top_n_publishers.name, 'value'),
+        Input(IdHolder.vg_top_n_games.name, 'value'),
     ],
     [
-        State(IdHolder.videogame_sales_by_publisher.name, 'figure'),
-        State(IdHolder.videogame_sales_top_games.name, 'figure'),
-        State(IdHolder.videogame_sales_by_genre.name, 'figure'),
-        State(IdHolder.videogame_sales_genre_by_year.name, 'figure'),
-        State(IdHolder.videogame_sales_genre_by_platform.name, 'figure'),
-        State(IdHolder.videogame_sales_region_platform_genre.name, 'figure'),
-        State(IdHolder.videogame_sales_rank_by_year.name, 'figure'),
-        State(IdHolder.videogame_sales_amount_title.name, 'children'),
-        State(IdHolder.videogame_sales_top_game_title.name, 'children'),
-        State(IdHolder.videogame_sales_top_freq_platform_title.name, 'children'),
-        State(IdHolder.videogame_sales_trending_genre_title.name, 'children'),
-        State(IdHolder.videogame_sales_trending_genre_description.name, 'children'),
+        State(IdHolder.vg_by_publisher.name, 'figure'),
+        State(IdHolder.vg_top_games.name, 'figure'),
+        State(IdHolder.vg_by_genre.name, 'figure'),
+        State(IdHolder.vg_genre_by_year.name, 'figure'),
+        State(IdHolder.vg_genre_by_platform.name, 'figure'),
+        State(IdHolder.vg_region_platform_genre.name, 'figure'),
+        State(IdHolder.vg_rank_by_year.name, 'figure'),
+        State(IdHolder.vg_sales_amount_title.name, 'children'),
+        State(IdHolder.vg_top_game_title.name, 'children'),
+        State(IdHolder.vg_top_freq_platform_title.name, 'children'),
+        State(IdHolder.vg_trending_genre_title.name, 'children'),
+        State(IdHolder.vg_trending_genre_description.name, 'children'),
     ],
 )
 def videogame_sales_filter(
@@ -150,16 +152,16 @@ def videogame_sales_filter(
     platform = (
         update_videogame_sales_top_freq_platform(df)
         if not ctx.triggered_id
-        or ctx.triggered_id == IdHolder.videogame_sales_years_range.name
-        or ctx.triggered_id == IdHolder.videogame_sales_region.name
+        or ctx.triggered_id == IdHolder.vg_years_range.name
+        or ctx.triggered_id == IdHolder.vg_region.name
         else k_top_freq_platform_title
     )
 
     genre, second_max, diff_second_max, g_min, diff_min = (
         update_videogame_sales_trending_genre(df)
         if not ctx.triggered_id
-        or ctx.triggered_id == IdHolder.videogame_sales_years_range.name
-        or ctx.triggered_id == IdHolder.videogame_sales_region.name
+        or ctx.triggered_id == IdHolder.vg_years_range.name
+        or ctx.triggered_id == IdHolder.vg_region.name
         else (
             k_trending_genre_title[1]['props']['children'],
             k_trending_genre_description[3].split(' ')[-1],
@@ -179,68 +181,68 @@ def videogame_sales_filter(
         (
             update_videogame_sales_by_publisher(df)
             if not ctx.triggered_id
-            or ctx.triggered_id == IdHolder.videogame_sales_years_range.name
-            or ctx.triggered_id == IdHolder.videogame_sales_region.name
-            or ctx.triggered_id == IdHolder.videogame_sales_top_n_publishers.name
+            or ctx.triggered_id == IdHolder.vg_years_range.name
+            or ctx.triggered_id == IdHolder.vg_region.name
+            or ctx.triggered_id == IdHolder.vg_top_n_publishers.name
             else g_by_publisher
         ),
         (
             update_videogame_sales_top_games(df)
             if not ctx.triggered_id
-            or ctx.triggered_id == IdHolder.videogame_sales_years_range.name
-            or ctx.triggered_id == IdHolder.videogame_sales_region.name
-            or ctx.triggered_id == IdHolder.videogame_sales_top_n_games.name
+            or ctx.triggered_id == IdHolder.vg_years_range.name
+            or ctx.triggered_id == IdHolder.vg_region.name
+            or ctx.triggered_id == IdHolder.vg_top_n_games.name
             else g_top_games
         ),
         (
             update_videogame_sales_by_genre(df)
             if not ctx.triggered_id
-            or ctx.triggered_id == IdHolder.videogame_sales_years_range.name
-            or ctx.triggered_id == IdHolder.videogame_sales_region.name
-            or ctx.triggered_id == IdHolder.videogame_sales_top_n_publishers.name
+            or ctx.triggered_id == IdHolder.vg_years_range.name
+            or ctx.triggered_id == IdHolder.vg_region.name
+            or ctx.triggered_id == IdHolder.vg_top_n_publishers.name
             else g_by_genre
         ),
         (
             update_videogame_sales_genre_by_year(df)
             if not ctx.triggered_id
-            or ctx.triggered_id == IdHolder.videogame_sales_years_range.name
-            or ctx.triggered_id == IdHolder.videogame_sales_region.name
+            or ctx.triggered_id == IdHolder.vg_years_range.name
+            or ctx.triggered_id == IdHolder.vg_region.name
             else g_genre_by_year
         ),
         (
             update_videogame_sales_genre_by_platform(df)
             if not ctx.triggered_id
-            or ctx.triggered_id == IdHolder.videogame_sales_years_range.name
-            or ctx.triggered_id == IdHolder.videogame_sales_region.name
+            or ctx.triggered_id == IdHolder.vg_years_range.name
+            or ctx.triggered_id == IdHolder.vg_region.name
             else g_genre_by_platform
         ),
         (
             update_videogame_sales_region_platform_genre()
             if not ctx.triggered_id
-            or ctx.triggered_id == IdHolder.videogame_sales_years_range.name
-            or ctx.triggered_id == IdHolder.videogame_sales_region.name
+            or ctx.triggered_id == IdHolder.vg_years_range.name
+            or ctx.triggered_id == IdHolder.vg_region.name
             else g_region_platform_genre
         ),
         (
             update_videogame_sales_rank_by_year(df)
             if not ctx.triggered_id
-            or ctx.triggered_id == IdHolder.videogame_sales_years_range.name
-            or ctx.triggered_id == IdHolder.videogame_sales_region.name
+            or ctx.triggered_id == IdHolder.vg_years_range.name
+            or ctx.triggered_id == IdHolder.vg_region.name
             else g_rank_by_year
         ),
         # KPIs
         (
             update_videogame_sales_amount(df)
             if not ctx.triggered_id
-            or ctx.triggered_id == IdHolder.videogame_sales_years_range.name
-            or ctx.triggered_id == IdHolder.videogame_sales_region.name
+            or ctx.triggered_id == IdHolder.vg_years_range.name
+            or ctx.triggered_id == IdHolder.vg_region.name
             else k_amount_title
         ),
         (
             update_videogame_sales_top_game(df)
             if not ctx.triggered_id
-            or ctx.triggered_id == IdHolder.videogame_sales_years_range.name
-            or ctx.triggered_id == IdHolder.videogame_sales_region.name
+            or ctx.triggered_id == IdHolder.vg_years_range.name
+            or ctx.triggered_id == IdHolder.vg_region.name
             else k_top_game_title
         ),
         platform,
