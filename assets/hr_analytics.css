@@ -158,3 +158,23 @@ body:has(.main-container.main-container--hr-analytics) {
 .VirtualizedSelectOption {
     background-color: #27293d; /* TODO: make specific for this dropdown */
 }
+
+.title-container--hr-analytics > div {
+    display: flex;
+    align-items: center;
+}
+
+.title-container--hr-analytics > div > label {
+    margin-right: 1rem;
+}
+
+#hr_bin_slider_container {
+    font-size: 1rem;
+    display: flex;
+    align-items: top;
+    justify-content: flex-end;
+}
+
+#hr_bin_slider {
+    width: 15rem;
+}

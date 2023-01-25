@@ -239,6 +239,7 @@ layout = lb.layout(
                 ),
                 lb.graph_card(
                     'Sales by Genre and Publisher',
+                    4,
                     IdHolder.vg_by_genre_title.name,
                     IdHolder.vg_by_genre.name,
                 ),
@@ -272,21 +273,25 @@ layout = lb.layout(
                 ),
                 lb.graph_card(
                     'Sales by Genre over the Years',
+                    4,
                     IdHolder.vg_genre_by_year_title.name,
                     IdHolder.vg_genre_by_year.name,
                 ),
                 lb.graph_card(
                     'Sales by Genre and Platform',
+                    4,
                     IdHolder.vg_genre_by_platform_title.name,
                     IdHolder.vg_genre_by_platform.name,
                 ),
                 lb.graph_card(
                     'Sales by Rank over the Years',
+                    4,
                     IdHolder.vg_rank_by_year_title.name,
                     IdHolder.vg_rank_by_year.name,
                 ),
                 lb.graph_card(
                     'Sales by Region, Platform and Genre',
+                    4,
                     IdHolder.vg_region_platform_genre_title.name,
                     IdHolder.vg_region_platform_genre.name,
                 ),

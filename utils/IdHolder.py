@@ -82,18 +82,22 @@ class IdHolder(Enum):
 
     hr_callback_dispatcher = auto()
     hr_education_dropdown = auto()
+    hr_bin_slider_container = auto()
+    hr_bin_slider = auto()
 
     hr_employee_count_title = auto()
     hr_attrition_count_title = auto()
     hr_attrition_rate_title = auto()
     hr_active_employee_count_title = auto()
     hr_average_age_title = auto()
+    hr_average_income_title = auto()
 
     hr_employee_count = auto()
     hr_attrition_count = auto()
     hr_attrition_rate = auto()
     hr_active_employee_count = auto()
     hr_average_age = auto()
+    hr_average_income = auto()
 
     hr_attrition_by_gender_title = auto()
     hr_attrition_by_gender_graph = auto()

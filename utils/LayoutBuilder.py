@@ -103,11 +103,12 @@ class LayoutBuilder:
         )
 
     @staticmethod
-    def graph_card(title, id_title, id_graph, config={}):
+    def graph_card(title, size, id_title, id_graph, config={}, controls=None):
         return dbc.Card(
             dbc.CardBody(
                 [
-                    html.H4(title, className='card-title', id=id_title),
+                    getattr(html, f'H{size}')(title, className='card-title', id=id_title),
+                    controls,
                     dbc.Spinner(
                         [
                             dcc.Graph(id=id_graph, config=config),

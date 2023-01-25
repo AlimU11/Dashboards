@@ -10,9 +10,10 @@ from utils.AppData import app_data
 def plot_kpi():
     employee_count = app_data.hr_analytics_data.shape[0]
     attrition_count = app_data.hr_attrition.shape[0]
-    attrition_rate = round(attrition_count / employee_count * 100, 2)
+    attrition_rate = f'{round(attrition_count / employee_count * 100, 2)} %'
     active_employee = employee_count - attrition_count
     average_age = round(app_data.hr_analytics_data.Age.mean())
+    average_income = f'$ {round(app_data.hr_analytics_data["Monthly Income"].mean())}'
 
     return [
         employee_count,
@@ -20,6 +21,7 @@ def plot_kpi():
         attrition_rate,
         active_employee,
         average_age,
+        average_income,
     ]
 
 
@@ -60,7 +62,7 @@ def plot_attrition_by_gender():
             ticktext=[f'<b>{i}</b>' for i in by_gender.index],
         ),
         xaxis=dict(
-            range=[0, by_gender.max() * 1.15],
+            range=[0, by_gender.max() * 1.17],
             visible=False,
         ),
         height=100,
@@ -121,10 +123,9 @@ def plot_attrition_by_department():
     return fig
 
 
-def plot_employees_by_age():
+def plot_employees_by_age(binsize):
     fig = go.Figure()
 
-    binsize = 4
     ages = app_data.hr_analytics_data.Age
     by_age_group = pd.cut(
         ages,
@@ -179,6 +180,7 @@ def plot_job_satisfaction_rating():
         columns='Job Satisfaction',
         aggfunc='count',
         margins=True,
+        fill_value=0,
     )
 
     pivot = pivot.rename(index={pivot.index[-1]: 'Grand Total'})
@@ -211,7 +213,7 @@ def plot_job_satisfaction_rating():
 
     pivot.columns = pd.MultiIndex.from_arrays(arr.T)
 
-    return dbc.Table.from_dataframe(pivot, bordered=True, hover=True, size='sm')
+    return dbc.Table.from_dataframe(pivot, bordered=True, size='sm')
 
 
 def plot_attrition_by_education():
@@ -260,13 +262,6 @@ def plot_attrition_by_education():
 
 
 def plot_attrition_by_gender_age():
-    fig = go.Figure()
-
-    fig = make_subplots(
-        rows=1,
-        cols=5,
-        specs=[[{'type': 'domain'}] * 5],
-    )
 
     groups = (
         pd.concat(
@@ -284,72 +279,44 @@ def plot_attrition_by_gender_age():
         .count()
     )
 
+    groups = groups.query('Attrition > 0').assign(
+        color=lambda _df: _df.Gender.apply(lambda x: '#FF6692' if x == 'Female' else '#636EFA'),
+    )
+
+    fig = make_subplots(
+        rows=1,
+        cols=groups.Age.nunique(),
+        specs=[[{'type': 'domain'}] * groups.Age.nunique()],
+    )
+
     for i, age_group in enumerate(groups.Age.unique()):
+        pie_group = groups[groups.Age == age_group]
+
         fig.add_trace(
             go.Pie(
-                labels=['Female', 'Male'],
-                values=groups[groups.Age == age_group].Attrition.values,
+                labels=pie_group.Gender.unique(),
+                values=pie_group.Attrition.values,
                 sort=True,
                 direction='clockwise',
                 textinfo='percent+value',
-                marker_colors=['#FF6692', '#636EFA'],
+                marker_colors=pie_group.color.unique(),
                 textfont=dict(
                     size=15,
                 ),
                 name=age_group,
+                title=dict(
+                    text=f'<br><b>{age_group}</b>',
+                    font=dict(
+                        size=18,
+                    ),
+                ),
+                titleposition='bottom center',
             ),
             row=1,
             col=i + 1,
         )
 
     fig.update_layout(
-        annotations=[
-            dict(
-                x=0.05,
-                y=0.1,
-                text='<b>Under 25</b>',
-                showarrow=False,
-                font=dict(
-                    size=18,
-                ),
-            ),
-            dict(
-                x=0.27,
-                y=0.1,
-                text='<b>25-34</b>',
-                showarrow=False,
-                font=dict(
-                    size=18,
-                ),
-            ),
-            dict(
-                x=0.50,
-                y=0.1,
-                text='<b>35-44</b>',
-                showarrow=False,
-                font=dict(
-                    size=18,
-                ),
-            ),
-            dict(
-                x=0.73,
-                y=0.1,
-                text='<b>45-54</b>',
-                showarrow=False,
-                font=dict(
-                    size=18,
-                ),
-            ),
-            dict(
-                x=0.935,
-                y=0.1,
-                text='<b>55+</b>',
-                showarrow=False,
-                font=dict(
-                    size=18,
-                ),
-            ),
-        ],
         legend=dict(
             orientation='h',
             y=1,
