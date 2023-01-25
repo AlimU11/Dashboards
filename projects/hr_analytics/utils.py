@@ -7,7 +7,7 @@ from plotly.subplots import make_subplots
 from utils.AppData import app_data
 
 
-def plot_kpi():
+def get_kpi():
     employee_count = app_data.hr_analytics_data.shape[0]
     attrition_count = app_data.hr_attrition.shape[0]
     attrition_rate = f'{round(attrition_count / employee_count * 100, 2)} %'
@@ -95,12 +95,6 @@ def plot_attrition_by_department():
     )
 
     fig.update_layout(
-        # legend=dict(
-        #     orientation='h',
-        #     y=0,
-        #     x=0.5,
-        #     xanchor='center',
-        # ),
         legend=dict(
             orientation='h',
             y=1.2,

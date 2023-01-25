@@ -7,6 +7,7 @@ class IdHolder(Enum):
     # Videogame Sales
 
     videogame_sales = auto()
+    vg_callback_dispatcher = auto()
 
     vg_sales_amount_title = auto()
     vg_sales_amount_description = auto()

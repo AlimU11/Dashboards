@@ -11,11 +11,12 @@ class LayoutBuilder:
         return dbc.Card(
             dbc.CardBody(
                 [
-                    html.H4(title, className='card-title'),
+                    html.H4(title, className='card-title', style={'text-align': 'center'}),
                     dcc.Graph(
                         figure=fig,
+                        config={'displayModeBar': False},
                     ),
-                    html.P(description, className='card-text'),
+                    html.P(description, className='card-text', style={'margin-top': '1rem'}),
                     dbc.Button(
                         children=[
                             html.I(
@@ -32,7 +33,7 @@ class LayoutBuilder:
                 ],
             ),
             # TODO: move style to css
-            style={'padding': '1rem', 'height': '26rem'},
+            style={'padding': '1rem', 'height': '28rem'},
         )
 
     @staticmethod
@@ -84,17 +85,17 @@ class LayoutBuilder:
         )
 
     @staticmethod
-    def kpi_card(title, size, description, id_title, id_description):
+    def kpi_card(title, title_size, description, title_id, description_id):
         return dbc.Card(
             dbc.CardBody(
                 [
                     dbc.Spinner(
                         [
-                            getattr(html, f'H{size}')(title, className='card-title', id=id_title),
+                            getattr(html, f'H{title_size}')(title, className='card-title', id=title_id),
                             html.P(
                                 description,
                                 className='card-text',
-                                id=id_description,
+                                id=description_id,
                             ),
                         ],
                     ),
@@ -103,15 +104,15 @@ class LayoutBuilder:
         )
 
     @staticmethod
-    def graph_card(title, size, id_title, id_graph, config={}, controls=None):
+    def graph_card(title, title_size, title_id, graph_id, config={}, controls=None):
         return dbc.Card(
             dbc.CardBody(
                 [
-                    getattr(html, f'H{size}')(title, className='card-title', id=id_title),
+                    getattr(html, f'H{title_size}')(title, className='card-title', id=title_id),
                     controls,
                     dbc.Spinner(
                         [
-                            dcc.Graph(id=id_graph, config=config),
+                            dcc.Graph(id=graph_id, config=config),
                         ],
                     ),
                 ],

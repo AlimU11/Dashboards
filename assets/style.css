@@ -17,8 +17,6 @@ body {
 .main-container {
     grid-column: 2;
     margin: 1rem 1rem 1rem 5rem;
-    border-radius: 15px;
-    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
     padding: 2.5rem;
 }
 

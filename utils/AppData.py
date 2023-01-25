@@ -6,8 +6,10 @@ from .Config import config
 
 class AppData:
     def __init__(self) -> None:
+        # TODO: change to nested classes/dataclasses
         self.__videogame_sales: dict = {
             'data': None,
+            'ranged_data': None,
             'top_n_publishers': None,
             'top_n_games': None,
             'region': None,

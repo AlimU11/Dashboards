@@ -13,6 +13,11 @@ make specific to videogame sales
 
 */
 
+.main-container--videogame-sales {
+    border-radius: 15px;
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
+}
+
 .main-grid--video-game-sales > .card,
 .kpi-container > .card,
 .genre-container > .card {
@@ -242,7 +247,7 @@ make specific to videogame sales
     grid-column: 1/4;
 }
 
-#vg_amount_description,
+#vg_sales_amount_description,
 #vg_top_game_description,
 #vg_top_freq_platform_description,
 #vg_trending_genre_description {

@@ -24,7 +24,7 @@ class Config(BaseSettings):
             name='HR Analytics',
             fig=pg.hr_analytics,
             description='Analysis of employees\' attrition',
-            button_text='Examine',
+            button_text='Inspect',
             icon='people-group',
         ),
     ]

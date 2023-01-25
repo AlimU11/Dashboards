@@ -4,13 +4,13 @@ from utils.AppData import app_data
 from utils.IdHolder import IdHolder
 
 from .utils import (
+    get_kpi,
     plot_attrition_by_department,
     plot_attrition_by_education,
     plot_attrition_by_gender,
     plot_attrition_by_gender_age,
     plot_employees_by_age,
     plot_job_satisfaction_rating,
-    plot_kpi,
 )
 
 
@@ -34,7 +34,7 @@ def dispatcher(_, value):
     ],
     Input(IdHolder.hr_callback_dispatcher.name, 'n_clicks'),
 )
-def bin_slider(_):
+def update_bin_slider(_):
     max_val = app_data.hr_analytics_data.Age.max() - app_data.hr_analytics_data.Age.min()
     return [
         max_val,
@@ -53,15 +53,15 @@ def bin_slider(_):
     ],
     Input(IdHolder.hr_callback_dispatcher.name, 'n_clicks'),
 )
-def kpi(_):
-    return plot_kpi()
+def update_kpi(_):
+    return get_kpi()
 
 
 @callback(
     Output(IdHolder.hr_attrition_by_gender_graph.name, 'figure'),
     Input(IdHolder.hr_callback_dispatcher.name, 'n_clicks'),
 )
-def attrition_by_gender(_):
+def update_attrition_by_gender(_):
     return plot_attrition_by_gender()
 
 
@@ -69,7 +69,7 @@ def attrition_by_gender(_):
     Output(IdHolder.hr_attrition_by_department_graph.name, 'figure'),
     Input(IdHolder.hr_callback_dispatcher.name, 'n_clicks'),
 )
-def attrition_by_department(_):
+def update_attrition_by_department(_):
     return plot_attrition_by_department()
 
 
@@ -80,7 +80,7 @@ def attrition_by_department(_):
         Input(IdHolder.hr_bin_slider.name, 'value'),
     ],
 )
-def employees_by_age_group(_, binsize):
+def update_employees_by_age_group(_, binsize):
     return plot_employees_by_age(binsize)
 
 
@@ -88,7 +88,7 @@ def employees_by_age_group(_, binsize):
     Output(IdHolder.hr_job_satisfaction_table.name, 'children'),
     Input(IdHolder.hr_callback_dispatcher.name, 'n_clicks'),
 )
-def job_satisfaction_table(_):
+def update_job_satisfaction_table(_):
     return plot_job_satisfaction_rating()
 
 
@@ -96,7 +96,7 @@ def job_satisfaction_table(_):
     Output(IdHolder.hr_attrition_by_education_graph.name, 'figure'),
     Input(IdHolder.hr_callback_dispatcher.name, 'n_clicks'),
 )
-def attrition_by_education(_):
+def update_attrition_by_education(_):
     return plot_attrition_by_education()
 
 
@@ -104,5 +104,5 @@ def attrition_by_education(_):
     Output(IdHolder.hr_attrition_by_gender_age_graph.name, 'figure'),
     Input(IdHolder.hr_callback_dispatcher.name, 'n_clicks'),
 )
-def attrition_by_gender_age(_):
+def update_attrition_by_gender_age(_):
     return plot_attrition_by_gender_age()

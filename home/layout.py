@@ -7,7 +7,7 @@ from utils.PreviewGraphs import preview_graphs as pg
 
 layout = html.Div(
     children=[
-        html.H1(children='This is our Home page'),
+        html.H1(children='Dashboards'),
         html.Div(
             children=[
                 *[
@@ -24,6 +24,6 @@ layout = html.Div(
             className='projects-container',
         ),
     ],
-    className='main-container',
+    className='main-container card',
     style={'margin': '1.5rem'},
 )
