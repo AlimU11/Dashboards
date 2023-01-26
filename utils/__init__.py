@@ -1,3 +1,3 @@
-from .AppData import AppData, app_data
+from .AppData import AppData, data
 from .IdHolder import IdHolder
 from .LayoutBuilder import LayoutBuilder

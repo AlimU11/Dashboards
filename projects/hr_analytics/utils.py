@@ -4,16 +4,16 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-from utils.AppData import app_data
+from utils.AppData import data
 
 
 def get_kpi():
-    employee_count = app_data.hr_analytics_data.shape[0]
-    attrition_count = app_data.hr_attrition.shape[0]
+    employee_count = data.hr.by_education.shape[0]
+    attrition_count = data.hr.attrition.shape[0]
     attrition_rate = f'{round(attrition_count / employee_count * 100, 2)} %'
     active_employee = employee_count - attrition_count
-    average_age = round(app_data.hr_analytics_data.Age.mean())
-    average_income = f'$ {round(app_data.hr_analytics_data["Monthly Income"].mean())}'
+    average_age = round(data.hr.by_education.Age.mean())
+    average_income = f'${round(data.hr.by_education["Monthly Income"].mean())}'
 
     return [
         employee_count,
@@ -27,7 +27,7 @@ def get_kpi():
 
 def plot_attrition_by_gender():
     fig = go.Figure()
-    by_gender = app_data.hr_attrition.Gender.value_counts()
+    by_gender = data.hr.attrition.Gender.value_counts()
 
     fig.add_trace(
         go.Bar(
@@ -80,7 +80,7 @@ def plot_attrition_by_gender():
 
 def plot_attrition_by_department():
     fig = go.Figure()
-    by_department = app_data.hr_attrition.Department.value_counts()
+    by_department = data.hr.attrition.Department.value_counts()
 
     fig.add_trace(
         go.Pie(
@@ -120,7 +120,7 @@ def plot_attrition_by_department():
 def plot_employees_by_age(binsize):
     fig = go.Figure()
 
-    ages = app_data.hr_analytics_data.Age
+    ages = data.hr.by_education.Age
     by_age_group = pd.cut(
         ages,
         bins=range(
@@ -168,7 +168,7 @@ def plot_employees_by_age(binsize):
 
 def plot_job_satisfaction_rating():
     pivot = pd.pivot_table(
-        app_data.hr_analytics_data,
+        data.hr.by_education,
         values='Age',
         index='Job Role',
         columns='Job Satisfaction',
@@ -213,7 +213,7 @@ def plot_job_satisfaction_rating():
 def plot_attrition_by_education():
     fig = go.Figure()
 
-    by_education = app_data.hr_attrition['Education Field'].value_counts()
+    by_education = data.hr.attrition['Education Field'].value_counts()
 
     fig.add_trace(
         go.Bar(
@@ -260,9 +260,9 @@ def plot_attrition_by_gender_age():
     groups = (
         pd.concat(
             [
-                app_data.hr_attrition[['Attrition', 'Gender']],
+                data.hr.attrition[['Attrition', 'Gender']],
                 pd.cut(
-                    app_data.hr_attrition.Age,
+                    data.hr.attrition.Age,
                     bins=[0, 25, 35, 45, 55, 100],
                     labels=['Under 25', '25-34', '35-44', '45-54', '55+'],
                 ),

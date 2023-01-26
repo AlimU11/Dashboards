@@ -1,6 +1,6 @@
-from dash import Input, Output, State, callback, ctx, html
+from dash import Input, Output, State, callback, html
 
-from utils import IdHolder, app_data
+from utils import IdHolder, data
 
 from .utils import (
     genres_dict,
@@ -61,7 +61,7 @@ def update_by_publisher(_, top_n_publishers):
 )
 def update_top_games(_, top_n_games):
     update_app_data(top_n_games=top_n_games)
-    return plot_top_games(app_data.videogame_sales['ranged_data'])
+    return plot_top_games(data.vg.ranged_data)
 
 
 @callback(
@@ -128,7 +128,7 @@ def update_rank_by_year(_):
     ],
 )
 def update_kpi(_, __, ___, ____, _____):
-    region = region_dict[app_data.videogame_sales['region']]
+    region = region_dict[data.vg.region]
 
     platform = get_top_freq_platform()
 
@@ -201,6 +201,6 @@ def update_genres(_):
     Input(IdHolder.vg_callback_dispatcher.name, 'n_clicks'),
 )
 def update_titles(_):
-    region = region_dict[app_data.videogame_sales['region']]
+    region = region_dict[data.vg.region]
 
     return get_titles(region)

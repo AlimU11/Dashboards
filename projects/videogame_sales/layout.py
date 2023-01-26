@@ -1,7 +1,7 @@
 import dash_bootstrap_components as dbc
 from dash import dcc, html
 
-from utils import IdHolder, app_data
+from utils import IdHolder, data
 from utils.LayoutBuilder import LayoutBuilder as lb
 
 layout = lb.layout(
@@ -27,8 +27,8 @@ layout = lb.layout(
                                     html.Label('Years'),
                                     dcc.RangeSlider(
                                         id=IdHolder.vg_years_range.name,
-                                        min=app_data.videogame_sales['data'].Year.min(),
-                                        max=app_data.videogame_sales['data'].Year.max(),
+                                        min=data.vg.data.Year.min(),
+                                        max=data.vg.data.Year.max(),
                                         step=1,
                                         allowCross=False,
                                         pushable=1,
@@ -39,14 +39,14 @@ layout = lb.layout(
                                         marks={
                                             i: str(i)
                                             for i in range(
-                                                int(app_data.videogame_sales['data'].Year.min()),
-                                                int(app_data.videogame_sales['data'].Year.max()) + 1,
+                                                int(data.vg.data.Year.min()),
+                                                int(data.vg.data.Year.max()) + 1,
                                                 5,
                                             )
                                         },
                                         value=[
-                                            app_data.videogame_sales['data'].Year.min(),
-                                            app_data.videogame_sales['data'].Year.max(),
+                                            data.vg.data.Year.min(),
+                                            data.vg.data.Year.max(),
                                         ],
                                     ),
                                 ],
@@ -237,7 +237,7 @@ layout = lb.layout(
                             ),
                             dbc.Input(
                                 type='number',
-                                value=app_data.videogame_sales['top_n_publishers'],
+                                value=data.vg.top_n_publishers,
                                 id=IdHolder.vg_top_n_publishers.name,
                             ),
                         ],
@@ -261,7 +261,7 @@ layout = lb.layout(
                             dbc.InputGroupText('Number of Games'),
                             dbc.Input(
                                 type='number',
-                                value=app_data.videogame_sales['top_n_games'],
+                                value=data.vg.top_n_games,
                                 id=IdHolder.vg_top_n_games.name,
                             ),
                         ],

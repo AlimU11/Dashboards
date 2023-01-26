@@ -5,7 +5,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from dash import html
 
-from utils.AppData import app_data
+from utils.AppData import data
 
 genres_dict = {
     'Action': 'fa-dragon',
@@ -32,43 +32,36 @@ region_dict = {
 
 
 def update_app_data(years_range=None, region=None, top_n_publishers=None, top_n_games=None):
-    app_data.videogame_sales['years_range'] = years_range or app_data.videogame_sales['years_range']
-    app_data.videogame_sales['top_n_publishers'] = top_n_publishers or app_data.videogame_sales['top_n_publishers']
-    app_data.videogame_sales['top_n_games'] = top_n_games or app_data.videogame_sales['top_n_games']
-    app_data.videogame_sales['region'] = region or app_data.videogame_sales['region']
-    app_data.videogame_sales['ranged_data'] = app_data.videogame_sales['data'][
-        app_data.videogame_sales['data']['Year'].between(
-            *app_data.videogame_sales['years_range'],
+    data.vg.years_range = years_range or data.vg.years_range
+    data.vg.top_n_publishers = top_n_publishers or data.vg.top_n_publishers
+    data.vg.top_n_games = top_n_games or data.vg.top_n_games
+    data.vg.region = region or data.vg.region
+    data.vg.ranged_data = data.vg.data[
+        data.vg.data.Year.between(
+            *data.vg.years_range,
             inclusive='both',
         )
     ]
 
 
 def get_sales_amount():
-    return f'''$ {app_data.videogame_sales['ranged_data'][app_data.videogame_sales['region']].sum():,.2f}M'''
+    return f'''$ {data.vg.ranged_data[data.vg.region].sum():,.2f}M'''
 
 
 def get_top_game():
-    title = (
-        app_data.videogame_sales['ranged_data']
-        .sort_values(by=app_data.videogame_sales['region'], ascending=False)['Name']
-        .iloc[0]
-    )
+    title = data.vg.ranged_data.sort_values(by=data.vg.region, ascending=False)['Name'].iloc[0]
     return title  # [:12] + ('' if len(title) < 12 else '...')
 
 
 def get_top_freq_platform():
-    return (
-        app_data.videogame_sales['ranged_data'].groupby('Platform')[app_data.videogame_sales['region']].sum().idxmax()
-    )
+    return data.vg.ranged_data.groupby('Platform')[data.vg.region].sum().idxmax()
 
 
 def get_trending_genre():
     genre_sum = (
-        app_data.videogame_sales['ranged_data']
-        .groupby(
+        data.vg.ranged_data.groupby(
             'Genre',
-        )[app_data.videogame_sales['region']]
+        )[data.vg.region]
         .sum()
         .sort_values(ascending=False)
     )
@@ -91,7 +84,7 @@ def get_titles(region):
         f'Sales by Genre over the Years {region}',
         f'Sales for top {5} Platform and their top {3} Genres {region}',
         f'Sales by Rank over the Years {region}',
-        f'Top {app_data.videogame_sales["top_n_games"]} Games {region}',
+        f'Top {data.vg.top_n_games} Games {region}',
     ]
 
 
@@ -109,7 +102,7 @@ def get_kpi_descriptions(region, platform, second_max, diff_second_max, g_min, d
             html.Br(),
             f'from ',
             html.Span(
-                f'''{app_data.videogame_sales['ranged_data'].Year.min():.0f}''',
+                f'''{data.vg.ranged_data.Year.min():.0f}''',
                 style={
                     'color': '#00CC96',
                     'font-weight': 'bold',
@@ -117,7 +110,7 @@ def get_kpi_descriptions(region, platform, second_max, diff_second_max, g_min, d
             ),
             f' to ',
             html.Span(
-                f'''{app_data.videogame_sales['ranged_data'].Year.max():.0f}''',
+                f'''{data.vg.ranged_data.Year.max():.0f}''',
                 style={
                     'color': '#00CC96',
                     'font-weight': 'bold',
@@ -127,24 +120,24 @@ def get_kpi_descriptions(region, platform, second_max, diff_second_max, g_min, d
         [
             f'(',
             html.Span(
-                f'''{app_data.videogame_sales['ranged_data'].sort_values(by=app_data.videogame_sales['region'], ascending=False).iloc[0].Genre}''',
+                f'''{data.vg.ranged_data.sort_values(by=data.vg.region, ascending=False).iloc[0].Genre}''',
                 style={'color': '#00CC96', 'font-weight': 'bold'},
             ),
             '/',
             html.Span(
-                f'''{app_data.videogame_sales['ranged_data'].sort_values(by=app_data.videogame_sales['region'], ascending=False).iloc[0].Year:.0f}''',
+                f'''{data.vg.ranged_data.sort_values(by=data.vg.region, ascending=False).iloc[0].Year:.0f}''',
                 style={'color': '#00CC96', 'font-weight': 'bold'},
             ),
             '), ',
             html.Span(
-                f'''{app_data.videogame_sales['ranged_data'].sort_values(by=app_data.videogame_sales['region'], ascending=False).iloc[0].Publisher}''',
+                f'''{data.vg.ranged_data.sort_values(by=data.vg.region, ascending=False).iloc[0].Publisher}''',
                 style={'color': '#00CC96', 'font-weight': 'bold'},
             ),
             html.Br(),
             'Has the biggest sales',
             html.Br(),
             html.Span(
-                f'''$ {app_data.videogame_sales['ranged_data'][app_data.videogame_sales['region']].iloc[0]:,.2f}M''',
+                f'''$ {data.vg.ranged_data[data.vg.region].iloc[0]:,.2f}M''',
                 style={'color': '#00CC96', 'font-weight': 'bold'},
             ),
         ],
@@ -152,7 +145,7 @@ def get_kpi_descriptions(region, platform, second_max, diff_second_max, g_min, d
             'Most popular platform for game developers',
             html.Br(),
             html.Span(
-                f'''{app_data.videogame_sales['ranged_data'][app_data.videogame_sales['region']][app_data.videogame_sales['ranged_data'].Platform == platform].count():,}''',
+                f'''{data.vg.ranged_data[data.vg.region][data.vg.ranged_data.Platform == platform].count():,}''',
                 style={'color': '#00CC96', 'font-weight': 'bold'},
             ),
             ' games developed',
@@ -176,7 +169,7 @@ def get_kpi_descriptions(region, platform, second_max, diff_second_max, g_min, d
 
 
 def get_genres():
-    genres = app_data.videogame_sales['ranged_data']['Genre'].value_counts()
+    genres = data.vg.ranged_data['Genre'].value_counts()
 
     return [[html.I(className=f'fa-solid {genres_dict[i]}'), i] for i in genres.index] + [
         html.B(f'{value:,.0f}') for value in genres.values
@@ -185,30 +178,25 @@ def get_genres():
 
 def plot_sales_by_publisher():
     sales_by_publisher = (
-        app_data.videogame_sales['ranged_data']
-        .groupby(
+        data.vg.ranged_data.groupby(
             'Publisher',
-        )[app_data.videogame_sales['region']]
+        )[data.vg.region]
         .sum()
         .sort_values()
     )
 
-    top_n_publishers = sales_by_publisher[-app_data.videogame_sales['top_n_publishers'] :].index
+    top_n_publishers = sales_by_publisher[-data.vg.top_n_publishers :].index
 
     sales_by_year_publisher = (
-        app_data.videogame_sales['ranged_data'][
-            app_data.videogame_sales['ranged_data']['Publisher'].isin(top_n_publishers)
-        ]
-        .groupby(['Year', 'Publisher'])[app_data.videogame_sales['region']]
+        data.vg.ranged_data[data.vg.ranged_data['Publisher'].isin(top_n_publishers)]
+        .groupby(['Year', 'Publisher'])[data.vg.region]
         .sum()
         .unstack()
     )
 
     sales_other = (
-        app_data.videogame_sales['ranged_data'][
-            ~app_data.videogame_sales['ranged_data']['Publisher'].isin(top_n_publishers)
-        ]
-        .groupby('Year')[app_data.videogame_sales['region']]
+        data.vg.ranged_data[~data.vg.ranged_data['Publisher'].isin(top_n_publishers)]
+        .groupby('Year')[data.vg.region]
         .sum()
     )
 
@@ -220,8 +208,8 @@ def plot_sales_by_publisher():
                 x=[
                     datetime.strptime(str(i), '%Y')
                     for i in range(
-                        app_data.videogame_sales['years_range'][0],
-                        app_data.videogame_sales['years_range'][1] + 1,
+                        data.vg.years_range[0],
+                        data.vg.years_range[1] + 1,
                     )
                 ],
                 y=sales_by_year_publisher[publisher],
@@ -235,8 +223,8 @@ def plot_sales_by_publisher():
             x=[
                 datetime.strptime(str(i), '%Y')
                 for i in range(
-                    app_data.videogame_sales['years_range'][0],
-                    app_data.videogame_sales['years_range'][1] + 1,
+                    data.vg.years_range[0],
+                    data.vg.years_range[1] + 1,
                 )
             ],
             y=sales_other,
@@ -272,18 +260,18 @@ def plot_top_games(df):
     sales_by_game = (
         df.groupby(
             'Name',
-        )[app_data.videogame_sales['region']]
+        )[data.vg.region]
         .sum()
         .sort_values()
     )
 
-    top_n_games = sales_by_game[-app_data.videogame_sales['top_n_games'] :].index
+    top_n_games = sales_by_game[-data.vg.top_n_games :].index
 
     fig = go.Figure()
 
     for game, sales in zip(
         top_n_games,
-        sales_by_game[-app_data.videogame_sales['top_n_games'] :],
+        sales_by_game[-data.vg.top_n_games :],
     ):
         fig.add_trace(
             go.Bar(
@@ -313,31 +301,26 @@ def plot_top_games(df):
 
 def plot_by_genre():
     sales_by_publisher = (
-        app_data.videogame_sales['ranged_data']
-        .groupby(
+        data.vg.ranged_data.groupby(
             'Publisher',
-        )[app_data.videogame_sales['region']]
+        )[data.vg.region]
         .sum()
         .sort_values()
     )
 
-    top_n_publishers = sales_by_publisher[-app_data.videogame_sales['top_n_publishers'] :].index
+    top_n_publishers = sales_by_publisher[-data.vg.top_n_publishers :].index
 
     sales_by_genre_publisher = pd.concat(
         [
             (
-                app_data.videogame_sales['ranged_data'][
-                    app_data.videogame_sales['ranged_data']['Publisher'].isin(top_n_publishers)
-                ]
-                .groupby(['Genre', 'Publisher'])[app_data.videogame_sales['region']]
+                data.vg.ranged_data[data.vg.ranged_data['Publisher'].isin(top_n_publishers)]
+                .groupby(['Genre', 'Publisher'])[data.vg.region]
                 .sum()
                 .unstack()
             ),
             (
-                app_data.videogame_sales['ranged_data'][
-                    ~app_data.videogame_sales['ranged_data']['Publisher'].isin(top_n_publishers)
-                ]
-                .groupby('Genre')[app_data.videogame_sales['region']]
+                data.vg.ranged_data[~data.vg.ranged_data['Publisher'].isin(top_n_publishers)]
+                .groupby('Genre')[data.vg.region]
                 .sum()
                 .rename('Others')
             ),
@@ -397,25 +380,20 @@ def plot_by_genre():
 
 
 def plot_genre_by_year():
-    sales_by_genre_year = (
-        app_data.videogame_sales['ranged_data']
-        .groupby(['Year', 'Genre'])[app_data.videogame_sales['region']]
-        .sum()
-        .reset_index()
-    )
+    sales_by_genre_year = data.vg.ranged_data.groupby(['Year', 'Genre'])[data.vg.region].sum().reset_index()
 
     fig = go.Figure(
         data=go.Scatter(
             x=sales_by_genre_year.Year,
             y=sales_by_genre_year.Genre,
-            text=['$' + str(i) + 'M' for i in sales_by_genre_year[app_data.videogame_sales['region']]],
+            text=['$' + str(i) + 'M' for i in sales_by_genre_year[data.vg.region]],
             mode='markers',
             marker=dict(
-                size=sales_by_genre_year[app_data.videogame_sales['region']],
+                size=sales_by_genre_year[data.vg.region],
                 sizemode='area',
-                sizeref=2.0 * max(sales_by_genre_year[app_data.videogame_sales['region']]) / (40.0**2),
+                sizeref=2.0 * max(sales_by_genre_year[data.vg.region]) / (40.0**2),
                 sizemin=4,
-                color=sales_by_genre_year[app_data.videogame_sales['region']],
+                color=sales_by_genre_year[data.vg.region],
                 colorscale='Viridis',
             ),
         ),
@@ -433,33 +411,25 @@ def plot_genre_by_platform():
     top_n_genres = 3
 
     top_3_genres = (
-        app_data.videogame_sales['ranged_data']
-        .groupby(['Platform', 'Genre'])[app_data.videogame_sales['region']]
+        data.vg.ranged_data.groupby(['Platform', 'Genre'])[data.vg.region]
         .sum()
         .reset_index()
         .sort_values(
-            by=['Platform', app_data.videogame_sales['region']],
+            by=['Platform', data.vg.region],
             ascending=False,
         )
         .groupby('Platform')
         .head(top_n_genres)
     )
 
-    top_platforms = (
-        app_data.videogame_sales['ranged_data']
-        .groupby('Platform')[app_data.videogame_sales['region']]
-        .sum()
-        .sort_values()
-        .index[-top_n_platforms:]
-    )
+    top_platforms = data.vg.ranged_data.groupby('Platform')[data.vg.region].sum().sort_values().index[-top_n_platforms:]
 
     top_genres_top_platforms = (
-        app_data.videogame_sales['ranged_data']
-        .groupby(['Platform', 'Genre'])[app_data.videogame_sales['region']]
+        data.vg.ranged_data.groupby(['Platform', 'Genre'])[data.vg.region]
         .sum()
         .reset_index()
         .sort_values(
-            by=['Platform', app_data.videogame_sales['region']],
+            by=['Platform', data.vg.region],
             ascending=False,
         )
         .groupby('Platform')
@@ -469,7 +439,7 @@ def plot_genre_by_platform():
     fig = go.Figure()
 
     for genre in top_genres_top_platforms.Genre.unique():
-        x = top_genres_top_platforms[top_genres_top_platforms['Genre'] == genre][app_data.videogame_sales['region']]
+        x = top_genres_top_platforms[top_genres_top_platforms['Genre'] == genre][data.vg.region]
         fig.add_trace(
             go.Bar(
                 y=top_genres_top_platforms[
@@ -504,9 +474,9 @@ def plot_genre_by_platform():
 
 
 def plot_region_platform_genre():
-    df = app_data.videogame_sales['data_region'][
-        app_data.videogame_sales['data_region']['Year'].between(
-            *app_data.videogame_sales['years_range'],
+    df = data.vg.data_region[
+        data.vg.data_region['Year'].between(
+            *data.vg.years_range,
             inclusive='both',
         )
     ]
@@ -526,21 +496,21 @@ def plot_region_platform_genre():
 
 
 def plot_rank_by_year():
-    df = app_data.videogame_sales['ranged_data'].sort_values(by='Rank').iloc[:100]
+    df = data.vg.ranged_data.sort_values(by='Rank').iloc[:100]
 
     fig = go.Figure(
         data=go.Scatter(
             y=df.Year,
             x=df.Rank,
-            text=df.Name + ' $' + df[app_data.videogame_sales['region']].astype(str) + 'M',
+            text=df.Name + ' $' + df[data.vg.region].astype(str) + 'M',
             hoverinfo='text',
             mode='markers',
             marker=dict(
-                size=df[app_data.videogame_sales['region']],
+                size=df[data.vg.region],
                 sizemode='area',
-                sizeref=2.0 * max(df[app_data.videogame_sales['region']]) / (40.0**2),
+                sizeref=2.0 * max(df[data.vg.region]) / (40.0**2),
                 sizemin=4,
-                color=df[app_data.videogame_sales['region']],
+                color=df[data.vg.region],
             ),
         ),
     )

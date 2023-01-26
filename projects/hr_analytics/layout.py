@@ -1,7 +1,7 @@
 import dash_bootstrap_components as dbc
 from dash import dcc, html
 
-from utils.AppData import app_data
+from utils.AppData import data
 from utils.IdHolder import IdHolder
 from utils.LayoutBuilder import LayoutBuilder as lb
 
@@ -19,7 +19,7 @@ layout = lb.layout(
                     html.Label('Education'),
                     dcc.Dropdown(
                         id=IdHolder.hr_education_dropdown.name,
-                        options=['All'] + app_data.hr_education,
+                        options=['All'] + data.hr.education_list,
                         value='All',
                         clearable=False,
                     ),

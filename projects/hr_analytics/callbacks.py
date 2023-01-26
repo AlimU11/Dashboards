@@ -1,6 +1,6 @@
 from dash import Input, Output, callback, dcc, html
 
-from utils.AppData import app_data
+from utils.AppData import data
 from utils.IdHolder import IdHolder
 
 from .utils import (
@@ -22,8 +22,7 @@ from .utils import (
     ],
 )
 def dispatcher(_, value):
-    hr_analytics = app_data.hr_analytics
-    hr_analytics['education'] = value
+    data.hr.education = value
     return _
 
 
@@ -35,7 +34,7 @@ def dispatcher(_, value):
     Input(IdHolder.hr_callback_dispatcher.name, 'n_clicks'),
 )
 def update_bin_slider(_):
-    max_val = app_data.hr_analytics_data.Age.max() - app_data.hr_analytics_data.Age.min()
+    max_val = data.hr.by_education.Age.max() - data.hr.by_education.Age.min()
     return [
         max_val,
         {i: str(i) for i in range(1, int(max_val * 1.1), int(max_val * 0.25))},
