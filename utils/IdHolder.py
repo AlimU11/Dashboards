@@ -4,6 +4,8 @@ from enum import Enum, auto
 class IdHolder(Enum):
     home = auto()
 
+    UNDEFINED = auto()
+
     # Videogame Sales
 
     videogame_sales = auto()
@@ -117,3 +119,10 @@ class IdHolder(Enum):
 
     hr_attrition_by_gender_age_title = auto()
     hr_attrition_by_gender_age_graph = auto()
+
+    # Sales Performance
+    sales_performance = auto()
+
+    sp_callback_dispatcher = auto()
+
+    sp_avg_calls_graph = auto()

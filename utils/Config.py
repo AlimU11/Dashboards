@@ -27,13 +27,23 @@ class Config(BaseSettings):
             button_text='Inspect',
             icon='people-group',
         ),
+        Project(
+            name='Sales Performance',
+            fig=pg.sales_performance,
+            description='Analysis of sales performance of a company',
+            button_text='View',
+            icon='phone-volume',
+        ),
     ]
 
-    videogame_sales_data_path: str = 'data/vgsales.csv'
-    videogame_sales_top_n_publishers_default: int = 5
-    videogame_sales_top_n_games_default: int = 10
+    vg_data_path: str = 'data/vgsales.csv'
+    vg_default_top_n_publishers: int = 5
+    vg_default_top_n_games: int = 10
 
-    hr_analytics_data_path: str = 'data/HR Data.csv'
+    hr_data_path: str = 'data/HR Data.csv'
+    hr_default_bin_size: int = 3
+
+    sp_data_path: str = 'data/sp Data.xlsx'
 
 
 config = Config()

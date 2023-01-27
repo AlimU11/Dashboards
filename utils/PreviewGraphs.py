@@ -5,6 +5,7 @@ class PreviewGraphs:
     def __init__(self):
         self._videogame_sales: go.Figure = self.__videogame_sales()
         self._hr_analytics: go.Figure = self.__hr_analytics()
+        self._sales_performance: go.Figure = self.__sales_performance()
 
     def __videogame_sales(self) -> go.Figure:
         vg = go.Figure()
@@ -77,6 +78,9 @@ class PreviewGraphs:
                 direction='clockwise',
                 textposition='inside',
                 textinfo='label+percent',
+                textfont=dict(
+                    color='#FFFFFF',
+                ),
             ),
         )
 
@@ -96,6 +100,9 @@ class PreviewGraphs:
 
         return hr_analytics
 
+    def __sales_performance(self) -> go.Figure:
+        return go.Figure().update_layout(height=200)
+
     @property
     def videogame_sales(self) -> go.Figure:
         return self._videogame_sales
@@ -103,6 +110,10 @@ class PreviewGraphs:
     @property
     def hr_analytics(self) -> go.Figure:
         return self._hr_analytics
+
+    @property
+    def sales_performance(self) -> go.Figure:
+        return self._sales_performance
 
 
 preview_graphs = PreviewGraphs()

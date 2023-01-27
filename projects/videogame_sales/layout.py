@@ -5,16 +5,9 @@ from utils import IdHolder, data
 from utils.LayoutBuilder import LayoutBuilder as lb
 
 layout = lb.layout(
+    callback_dispatcher_id=IdHolder.vg_callback_dispatcher.name,
     project_class='videogame-sales',
-    title=html.H1(
-        children=[
-            'Video Game Sales',
-            dbc.Button(
-                id=IdHolder.vg_callback_dispatcher.name,
-                style={'display': 'none'},
-            ),
-        ],
-    ),
+    title=html.H1('Video Game Sales'),
     children=[
         html.Div(
             children=[
@@ -229,7 +222,6 @@ layout = lb.layout(
                     title_size=4,
                     title_id=IdHolder.vg_by_publisher_title.name,
                     graph_id=IdHolder.vg_by_publisher.name,
-                    config={'displayModeBar': False},
                     controls=dbc.InputGroup(
                         [
                             dbc.InputGroupText(
@@ -248,14 +240,12 @@ layout = lb.layout(
                     title_size=4,
                     title_id=IdHolder.vg_by_genre_title.name,
                     graph_id=IdHolder.vg_by_genre.name,
-                    config={'displayModeBar': False},
                 ),
                 lb.graph_card(
-                    'Top Games',
+                    title='Top Games',
                     title_size=4,
                     title_id=IdHolder.vg_top_games_title.name,
                     graph_id=IdHolder.vg_top_games.name,
-                    config={'displayModeBar': False},
                     controls=dbc.InputGroup(
                         [
                             dbc.InputGroupText('Number of Games'),
@@ -272,28 +262,24 @@ layout = lb.layout(
                     title_size=4,
                     title_id=IdHolder.vg_genre_by_year_title.name,
                     graph_id=IdHolder.vg_genre_by_year.name,
-                    config={'displayModeBar': False},
                 ),
                 lb.graph_card(
                     title='Sales by Genre and Platform',
                     title_size=4,
                     title_id=IdHolder.vg_genre_by_platform_title.name,
                     graph_id=IdHolder.vg_genre_by_platform.name,
-                    config={'displayModeBar': False},
                 ),
                 lb.graph_card(
                     title='Sales by Rank over the Years',
                     title_size=4,
                     title_id=IdHolder.vg_rank_by_year_title.name,
                     graph_id=IdHolder.vg_rank_by_year.name,
-                    config={'displayModeBar': False},
                 ),
                 lb.graph_card(
                     title='Sales by Region, Platform and Genre',
                     title_size=4,
                     title_id=IdHolder.vg_region_platform_genre_title.name,
                     graph_id=IdHolder.vg_region_platform_genre.name,
-                    config={'displayModeBar': False},
                 ),
             ],
             className='main-grid main-grid--video-game-sales',

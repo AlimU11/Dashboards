@@ -25,9 +25,9 @@ class AppData:
             self.__vg_transform_sales()
 
         def __read_data(self) -> None:
-            self.data = pd.read_csv(config.videogame_sales_data_path)
-            self.top_n_publishers = int(config.videogame_sales_top_n_publishers_default)
-            self.top_n_games = int(config.videogame_sales_top_n_games_default)
+            self.data = pd.read_csv(config.vg_data_path)
+            self.top_n_publishers = int(config.vg_default_top_n_publishers)
+            self.top_n_games = int(config.vg_default_top_n_games)
 
         def __vg_transform_sales(self) -> None:
             """
@@ -60,7 +60,7 @@ class AppData:
             self.__read_data()
 
         def __read_data(self) -> None:
-            self.data = pd.read_csv(config.hr_analytics_data_path)
+            self.data = pd.read_csv(config.hr_data_path)
             self.is_attrition = self.data.Attrition == 'Yes'
             self.education_list = self.data.Education.unique().tolist()
 
@@ -92,9 +92,21 @@ class AppData:
                 )
             ]
 
+    @dataclass
+    class SalesPerformance:
+
+        data: DataFrame
+
+        def __init__(self) -> None:
+            self.__read_data()
+
+        def __read_data(self) -> None:
+            self.data = pd.read_excel(config.sp_data_path)
+
     def __init__(self) -> None:
         self.__vg: AppData.VideogameSales = AppData.VideogameSales()
         self.__hr: AppData.HrAnalytics = AppData.HrAnalytics()
+        self.__sp: AppData.SalesPerformance = AppData.SalesPerformance()
 
     @property
     def vg(self) -> AppData.VideogameSales:
@@ -103,6 +115,10 @@ class AppData:
     @property
     def hr(self) -> AppData.HrAnalytics:
         return self.__hr
+
+    @property
+    def sp(self) -> AppData.SalesPerformance:
+        return self.__sp
 
 
 data = AppData()

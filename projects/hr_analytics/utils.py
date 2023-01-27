@@ -130,6 +130,8 @@ def plot_employees_by_age(binsize):
         ),
     )
 
+    by_age_group_attrition = by_age_group[data.hr.is_attrition]
+
     fig.add_trace(
         go.Bar(
             x=[i.left for i in by_age_group.value_counts().index],
@@ -139,11 +141,23 @@ def plot_employees_by_age(binsize):
             textfont=dict(
                 size=14,
             ),
+            width=binsize - 1 or 0.5,
+            name='All Employees',
+        ),
+    )
+
+    fig.add_trace(
+        go.Bar(
+            x=[i.left for i in by_age_group_attrition.value_counts().index],
+            y=by_age_group_attrition.value_counts().values,
+            width=binsize - 3 or 0.5,
+            name='Attrition',
         ),
     )
 
     fig.update_layout(
         bargap=0.2,
+        barmode='overlay',
         xaxis=dict(
             tickmode='array',
             tickvals=[i.left for i in by_age_group.value_counts().index],
@@ -158,6 +172,10 @@ def plot_employees_by_age(binsize):
         font=dict(
             family='Inter',
             color='#FFFFFF',
+        ),
+        legend=dict(
+            orientation='h',
+            y=1.2,
         ),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
@@ -296,6 +314,7 @@ def plot_attrition_by_gender_age():
                 marker_colors=pie_group.color.unique(),
                 textfont=dict(
                     size=15,
+                    color='#FFFFFF',
                 ),
                 name=age_group,
                 title=dict(

@@ -1,5 +1,11 @@
+from __future__ import annotations
+
+from typing import Sequence
+
 import dash_bootstrap_components as dbc
 from dash import dcc, html
+from dash.development.base_component import Component
+from plotly.graph_objects import Figure
 
 from .Config import config
 from .IdHolder import IdHolder
@@ -7,7 +13,7 @@ from .IdHolder import IdHolder
 
 class LayoutBuilder:
     @staticmethod
-    def project_card(title, fig, description, button_text, icon):
+    def project_card(title: str, fig: Figure, description: str, button_text: str, icon: str):
         return dbc.Card(
             dbc.CardBody(
                 [
@@ -37,9 +43,18 @@ class LayoutBuilder:
         )
 
     @staticmethod
-    def layout(project_class, title, children):
+    def layout(
+        project_class: str,
+        title: str | Component | None,
+        children: str | Sequence[Component],
+        callback_dispatcher_id: str = IdHolder.UNDEFINED.name,
+    ) -> Component:
         return html.Div(
             children=[
+                dbc.Button(
+                    id=callback_dispatcher_id,
+                    style={'display': 'none'},
+                ),
                 title,
                 html.Div(
                     children=children,
@@ -50,7 +65,7 @@ class LayoutBuilder:
         )
 
     @staticmethod
-    def sidebar(project_name):
+    def sidebar(project_name: str) -> Component:
         return html.Div(
             children=[
                 html.A(
@@ -85,7 +100,13 @@ class LayoutBuilder:
         )
 
     @staticmethod
-    def kpi_card(title, title_size, description, title_id, description_id):
+    def kpi_card(
+        title: str,
+        title_size: int | str,
+        description: str,
+        title_id: str,
+        description_id: str,
+    ) -> Component:
         return dbc.Card(
             dbc.CardBody(
                 [
@@ -104,11 +125,23 @@ class LayoutBuilder:
         )
 
     @staticmethod
-    def graph_card(title, title_size, title_id, graph_id, config={}, controls=None):
+    def graph_card(
+        graph_id: str,
+        title: str | Component = '',
+        title_size: int | str = 1,
+        title_id: str = IdHolder.UNDEFINED.name,
+        config: dict = {'displayModeBar': False},
+        controls=None,
+    ) -> Component:
         return dbc.Card(
             dbc.CardBody(
                 [
-                    getattr(html, f'H{title_size}')(title, className='card-title', id=title_id),
+                    getattr(html, f'H{title_size}')(
+                        title,
+                        className='card-title',
+                        id=title_id,
+                        style={'display': 'none'} if title_id == IdHolder.UNDEFINED.name else {},
+                    ),
                     controls,
                     dbc.Spinner(
                         [
