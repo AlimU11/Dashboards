@@ -150,7 +150,7 @@ def plot_employees_by_age(binsize):
         go.Bar(
             x=[i.left for i in by_age_group_attrition.value_counts().index],
             y=by_age_group_attrition.value_counts().values,
-            width=binsize - 3 or 0.5,
+            width=max(binsize - 3, 0.5),
             name='Attrition',
         ),
     )

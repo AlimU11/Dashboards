@@ -17,17 +17,10 @@ app = dash.Dash(
 
 for module in pkgutil.iter_modules(projects.__path__):
     module = getattr(projects, module.name)
-    module_name = module.__name__.replace('projects.', '')
 
     dash.register_page(
-        module_name,
-        layout=html.Div(
-            children=[
-                lb.sidebar(module_name.replace('_', '-')),
-                module.layout,
-            ],
-            className='page-container',
-        ),
+        module.__name__.replace('projects.', ''),
+        layout=module.layout,
     )
 
 dash.register_page(

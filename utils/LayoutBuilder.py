@@ -14,15 +14,24 @@ from .IdHolder import IdHolder
 class LayoutBuilder:
     @staticmethod
     def project_card(title: str, fig: Figure, description: str, button_text: str, icon: str):
+        """Project card template for main page"""
         return dbc.Card(
             dbc.CardBody(
                 [
-                    html.H4(title, className='card-title', style={'text-align': 'center'}),
+                    html.H4(
+                        title,
+                        className='card-title',
+                        style={'text-align': 'center'},
+                    ),
                     dcc.Graph(
                         figure=fig,
                         config={'displayModeBar': False},
                     ),
-                    html.P(description, className='card-text', style={'margin-top': '1rem'}),
+                    html.P(
+                        description,
+                        className='card-text',
+                        style={'margin-top': '1rem'},
+                    ),
                     dbc.Button(
                         children=[
                             html.I(
@@ -49,23 +58,31 @@ class LayoutBuilder:
         children: str | Sequence[Component],
         callback_dispatcher_id: str = IdHolder.UNDEFINED.name,
     ) -> Component:
+        """Layout template for all project pages"""
         return html.Div(
             children=[
-                dbc.Button(
-                    id=callback_dispatcher_id,
-                    style={'display': 'none'},
-                ),
-                title,
+                LayoutBuilder.sidebar(project_class),
                 html.Div(
-                    children=children,
-                    className=f'main-grid main-grid--{project_class}',
+                    children=[
+                        dbc.Button(
+                            id=callback_dispatcher_id,
+                            style={'display': 'none'},
+                        ),
+                        title,
+                        html.Div(
+                            children=children,
+                            className=f'main-grid main-grid--{project_class}',
+                        ),
+                    ],
+                    className=f'main-container main-container--{project_class}',
                 ),
             ],
-            className=f'main-container main-container--{project_class}',
+            className='page-container',
         )
 
     @staticmethod
     def sidebar(project_name: str) -> Component:
+        """Sidebar template for all project pages"""
         return html.Div(
             children=[
                 html.A(
@@ -75,7 +92,9 @@ class LayoutBuilder:
                 ),
                 *[
                     html.A(
-                        children=html.I(className=f'fa-solid fa-{project.icon}'),
+                        children=html.I(
+                            className=f'fa-solid fa-{project.icon}',
+                        ),
                         href=f'/{project.name.lower().replace(" ", "-")}',
                         id=getattr(
                             IdHolder,
@@ -107,12 +126,17 @@ class LayoutBuilder:
         title_id: str,
         description_id: str,
     ) -> Component:
+        """KPI card template"""
         return dbc.Card(
             dbc.CardBody(
                 [
                     dbc.Spinner(
                         [
-                            getattr(html, f'H{title_size}')(title, className='card-title', id=title_id),
+                            getattr(html, f'H{title_size}')(
+                                title,
+                                className='card-title',
+                                id=title_id,
+                            ),
                             html.P(
                                 description,
                                 className='card-text',
@@ -133,6 +157,7 @@ class LayoutBuilder:
         config: dict = {'displayModeBar': False},
         controls=None,
     ) -> Component:
+        """Graph card template"""
         return dbc.Card(
             dbc.CardBody(
                 [
@@ -140,7 +165,11 @@ class LayoutBuilder:
                         title,
                         className='card-title',
                         id=title_id,
-                        style={'display': 'none'} if title_id == IdHolder.UNDEFINED.name else {},
+                        style={
+                            'display': 'none',
+                        }
+                        if title_id == IdHolder.UNDEFINED.name
+                        else {},
                     ),
                     controls,
                     dbc.Spinner(

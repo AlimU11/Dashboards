@@ -1,0 +1,186 @@
+/*
+grid 17 width x 16 height
+*/
+
+.main-container.main-container--sales-performance {
+    background-color: hsl(240, 22%, 35%);
+    color: #fff;
+}
+
+
+.main-grid.main-grid--sales-performance > .card {
+    border-radius: 10px;
+    margin: 0.5rem;
+}
+
+.main-grid--sales-performance > div:nth-child(1) {
+    background-color: red;
+    height: 14rem;
+    width: 17.3rem;
+
+    grid-row: 1/5;
+    grid-column: 1/4;
+}
+
+.main-grid--sales-performance > div:nth-child(2) {
+    background-color: green;
+    height: 14rem;
+    width: 11.75rem;
+
+    grid-row: 1/5;
+    grid-column: 4/6;
+}
+
+.main-grid--sales-performance > div:nth-child(3) {
+    background-color: blue;
+    height: 14rem;
+    width: 35.625rem;
+
+    grid-row: 1/5;
+    grid-column: 6/12;
+}
+
+.main-grid--sales-performance > div:nth-child(4) {
+    background-color: yellow;
+    height: 14rem;
+    width: 11.75rem;
+
+    grid-row: 1/5;
+    grid-column: 12/14;
+}
+
+.main-grid--sales-performance > div:nth-child(5) {
+    background-color: orange;
+    height: 14rem;
+    width: 11.75rem;
+
+    grid-row: 1/5;
+    grid-column: 14/16;
+}
+
+.main-grid--sales-performance > div:nth-child(6) {
+    background-color: purple;
+    height: 14rem;
+    width: 11.75rem;
+
+    grid-row: 1/5;
+    grid-column: 16/18;
+}
+
+.main-grid--sales-performance > div:nth-child(7) {
+    background-color: pink;
+    height: 24.5rem;
+    width: 17.3rem;
+
+    grid-row: 5/12;
+    grid-column: 1/4;
+}
+
+.main-grid--sales-performance > div:nth-child(8) {
+    background-color: black;
+    height: 14rem;
+    width: 35.625rem;
+
+    grid-row: 5/9;
+    grid-column: 4/10;
+}
+
+.main-grid--sales-performance > div:nth-child(9) {
+    background-color: white;
+    color: black;
+    height: 14rem;
+    width: 11.75rem;
+
+
+    grid-row: 5/9;
+    grid-column: 10/12;
+}
+
+.main-grid--sales-performance > div:nth-child(10) {
+    background-color: grey;
+    height: 29rem; /* TODO: ???*/
+
+    grid-row: 5/13;
+    grid-column: 12/15;
+}
+
+.main-grid--sales-performance > div:nth-child(11) {
+    height: 14rem;
+
+    grid-row: 5/9;
+    grid-column: 15/18;
+}
+
+.main-grid--sales-performance > div:nth-child(12) {
+    height: 3.5rem;
+    width: 17.3rem;
+
+    grid-row: 12/13;
+    grid-column: 1/4;
+}
+
+/* TODO: refactor */
+
+.main-grid--sales-performance > div:nth-child(11) > .card-body,
+.main-grid--sales-performance > div:nth-child(12) > .card-body {
+    padding: 0;
+}
+
+.main-grid--sales-performance > div:nth-child(13) {
+    background-color: magenta;
+    height: 14rem;
+
+    grid-row: 9/13;
+    grid-column: 4/7;
+}
+
+.main-grid--sales-performance > div:nth-child(14) {
+    background-color: gold;
+    height: 14rem;
+    width: 29rem;
+
+    grid-row: 9/13;
+    grid-column: 7/12;
+}
+
+.main-grid--sales-performance > div:nth-child(15) {
+    background-color: silver;
+    height: 14rem;
+
+    grid-row: 9/13;
+    grid-column: 15/18;
+}
+
+.main-grid--sales-performance > div:nth-child(16) {
+    background-color: olive;
+    height: 14rem;
+
+    grid-row:13/17;
+    grid-column: 1/6;
+}
+
+.main-grid--sales-performance > div:nth-child(17) {
+    background-color: teal;
+    height: 14rem;
+    width: 11.75rem;
+
+    grid-row:13/17;
+    grid-column: 6/8;
+}
+
+.main-grid--sales-performance > div:nth-child(18) {
+    height: 14rem;
+    width: 22.5rem;
+
+    grid-row:13/17;
+    grid-column: 8/12;
+}
+
+
+.main-grid--sales-performance > div:nth-child(19) {
+    background-color: maroon;
+    height: 14rem;
+
+    grid-row:13/17;
+    grid-column: 12/18;
+}

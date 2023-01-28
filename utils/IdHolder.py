@@ -126,3 +126,5 @@ class IdHolder(Enum):
     sp_callback_dispatcher = auto()
 
     sp_avg_calls_graph = auto()
+    sp_area_code_graph = auto()
+    sp_fees_by_model_team_graph = auto()

@@ -89,6 +89,14 @@ body {
     color: #00CC96;
 }
 
+.sidebar a:hover:has(.fa-phone-volume) {
+    color: #FB0D0D;
+}
+
+.fa-phone-volume {
+    transform: rotate(-35deg);
+}
+
 /* MARKET PRICES
 
 TODO: uncomment when done
