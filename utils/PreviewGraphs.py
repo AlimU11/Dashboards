@@ -1,7 +1,11 @@
 import plotly.graph_objects as go
 
+from .Colors import Colors
+
 
 class PreviewGraphs:
+    """Preview graphs for different projects with dummy data"""
+
     def __init__(self):
         self._videogame_sales: go.Figure = self.__videogame_sales()
         self._hr_analytics: go.Figure = self.__hr_analytics()
@@ -44,7 +48,7 @@ class PreviewGraphs:
         vg.update_layout(
             legend=dict(
                 orientation='h',
-                y=1.2,
+                y=0,
             ),
             yaxis=dict(
                 tickprefix='$',
@@ -54,23 +58,23 @@ class PreviewGraphs:
             xaxis=dict(
                 visible=False,
             ),
-            paper_bgcolor='rgba(0,0,0,0)',
-            plot_bgcolor='rgba(0,0,0,0)',
+            paper_bgcolor=Colors.transparent,
+            plot_bgcolor=Colors.transparent,
             dragmode=False,
             margin=dict(l=0, r=0, t=0, b=0),
             font=dict(
                 family='Inter',
                 size=14,
-                color='#000000',
+                color=Colors.black,
             ),
         )
 
         return vg
 
     def __hr_analytics(self) -> go.Figure:
-        hr_analytics = go.Figure()
+        hr = go.Figure()
 
-        hr_analytics.add_trace(
+        hr.add_trace(
             go.Pie(
                 labels=['HR', 'Sales', 'R&D'],
                 values=[40, 90, 130],
@@ -79,29 +83,73 @@ class PreviewGraphs:
                 textposition='inside',
                 textinfo='label+percent',
                 textfont=dict(
-                    color='#FFFFFF',
+                    color=Colors.white,
                 ),
             ),
         )
 
-        hr_analytics.update_layout(
+        hr.update_layout(
             showlegend=False,
             height=200,
             margin=dict(l=0, r=0, t=0, b=0),
             font=dict(
                 family='Inter',
                 size=16,
-                color='#FFFFFF',
+                color=Colors.white,
             ),
-            paper_bgcolor='rgba(0,0,0,0)',
-            plot_bgcolor='rgba(0,0,0,0)',
+            paper_bgcolor=Colors.transparent,
+            plot_bgcolor=Colors.transparent,
             dragmode=False,
         )
 
-        return hr_analytics
+        return hr
 
     def __sales_performance(self) -> go.Figure:
-        return go.Figure().update_layout(height=200)
+        sp = go.Figure()
+
+        sp.update_layout(
+            height=200,
+            margin=dict(l=0, r=0, t=15, b=0),
+            paper_bgcolor=Colors.transparent,
+            polar=dict(
+                bgcolor=Colors.transparent,
+                radialaxis=dict(
+                    side='counterclockwise',
+                    showline=False,
+                    linewidth=1,
+                    gridcolor=Colors.grey,
+                    gridwidth=1,
+                    showticklabels=False,
+                    range=[0, 105 * 1.15],
+                    dtick=105 * 0.4,
+                ),
+                sector=[-180, 180],
+                angularaxis=dict(
+                    direction='clockwise',
+                    rotation=90,
+                    showline=True,
+                    linecolor=Colors.grey,
+                ),
+                gridshape='linear',
+            ),
+            font=dict(
+                family='Inter',
+                color=Colors.grey,
+            ),
+        )
+
+        sp.add_trace(
+            go.Scatterpolar(
+                r=[105, 90, 95, 50, 75, 105],
+                theta=['<b>A1</b>', '<b>A2</b>', '<b>B1</b>', '<b>B2</b>', '<b>C1</b>', '<b>A1</b>'],
+                fill='toself',
+                fillcolor=Colors.green.opacity(0.1),
+                mode='lines',
+                name='Area Code',
+            ),
+        )
+
+        return sp
 
     @property
     def videogame_sales(self) -> go.Figure:

@@ -5,30 +5,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 from dash import html
 
-from utils.AppData import data
-
-genres_dict = {
-    'Action': 'fa-dragon',
-    'Adventure': 'fa-compass',
-    'Fighting': 'fa-fist-raised',
-    'Misc': 'fa-circle-question',
-    'Platform': 'fa-gamepad',
-    'Puzzle': 'fa-puzzle-piece',
-    'Racing': 'fa-car',
-    'Role-Playing': 'fa-masks-theater',
-    'Shooter': 'fa-gun',
-    'Simulation': 'fa-robot',
-    'Sports': 'fa-futbol',
-    'Strategy': 'fa-chess',
-}
-
-region_dict = {
-    'Global_Sales': 'Globally',
-    'NA_Sales': 'in North America',
-    'EU_Sales': 'in Europe',
-    'JP_Sales': 'in Japan',
-    'Other_Sales': 'in other regions',
-}
+from utils import data
+from utils.Colors import Colors
 
 
 def update_app_data(years_range=None, region=None, top_n_publishers=None, top_n_games=None):
@@ -95,7 +73,7 @@ def get_kpi_descriptions(region, platform, second_max, diff_second_max, g_min, d
             html.Span(
                 f'{region}',
                 style={
-                    'color': '#00CC96',
+                    'color': Colors.green,
                     'font-weight': 'bold',
                 },
             ),
@@ -104,7 +82,7 @@ def get_kpi_descriptions(region, platform, second_max, diff_second_max, g_min, d
             html.Span(
                 f'''{data.vg.ranged_data.Year.min():.0f}''',
                 style={
-                    'color': '#00CC96',
+                    'color': Colors.green,
                     'font-weight': 'bold',
                 },
             ),
@@ -112,7 +90,7 @@ def get_kpi_descriptions(region, platform, second_max, diff_second_max, g_min, d
             html.Span(
                 f'''{data.vg.ranged_data.Year.max():.0f}''',
                 style={
-                    'color': '#00CC96',
+                    'color': Colors.green,
                     'font-weight': 'bold',
                 },
             ),
@@ -121,24 +99,24 @@ def get_kpi_descriptions(region, platform, second_max, diff_second_max, g_min, d
             f'(',
             html.Span(
                 f'''{data.vg.ranged_data.sort_values(by=data.vg.region, ascending=False).iloc[0].Genre}''',
-                style={'color': '#00CC96', 'font-weight': 'bold'},
+                style={'color': Colors.green, 'font-weight': 'bold'},
             ),
             '/',
             html.Span(
                 f'''{data.vg.ranged_data.sort_values(by=data.vg.region, ascending=False).iloc[0].Year:.0f}''',
-                style={'color': '#00CC96', 'font-weight': 'bold'},
+                style={'color': Colors.green, 'font-weight': 'bold'},
             ),
             '), ',
             html.Span(
                 f'''{data.vg.ranged_data.sort_values(by=data.vg.region, ascending=False).iloc[0].Publisher}''',
-                style={'color': '#00CC96', 'font-weight': 'bold'},
+                style={'color': Colors.green, 'font-weight': 'bold'},
             ),
             html.Br(),
             'Has the biggest sales',
             html.Br(),
             html.Span(
                 f'''$ {data.vg.ranged_data[data.vg.region].iloc[0]:,.2f}M''',
-                style={'color': '#00CC96', 'font-weight': 'bold'},
+                style={'color': Colors.green, 'font-weight': 'bold'},
             ),
         ],
         [
@@ -146,7 +124,7 @@ def get_kpi_descriptions(region, platform, second_max, diff_second_max, g_min, d
             html.Br(),
             html.Span(
                 f'''{data.vg.ranged_data[data.vg.region][data.vg.ranged_data.Platform == platform].count():,}''',
-                style={'color': '#00CC96', 'font-weight': 'bold'},
+                style={'color': Colors.green, 'font-weight': 'bold'},
             ),
             ' games developed',
         ],
@@ -155,13 +133,13 @@ def get_kpi_descriptions(region, platform, second_max, diff_second_max, g_min, d
             html.Br(),
             html.Span(
                 f'+{diff_second_max}%',
-                style={'color': '#00CC96', 'font-weight': 'bold'},
+                style={'color': Colors.green, 'font-weight': 'bold'},
             ),
             f' compared to {second_max}',
             html.Br(),
             html.Span(
                 f'+{diff_min}%',
-                style={'color': '#00CC96', 'font-weight': 'bold'},
+                style={'color': Colors.green, 'font-weight': 'bold'},
             ),
             f' compared to {g_min}',
         ],
@@ -171,9 +149,10 @@ def get_kpi_descriptions(region, platform, second_max, diff_second_max, g_min, d
 def get_genres():
     genres = data.vg.ranged_data['Genre'].value_counts()
 
-    return [[html.I(className=f'fa-solid {genres_dict[i]}'), i] for i in genres.index] + [
-        html.B(f'{value:,.0f}') for value in genres.values
-    ]
+    return [
+        [html.I(className=f'''fa-solid {getattr(data.vg.Genre, str(i).lower().replace('-', '_'))}'''), i]
+        for i in genres.index
+    ] + [html.B(f'{value:,.0f}') for value in genres.values]
 
 
 def plot_sales_by_publisher():
@@ -374,6 +353,8 @@ def plot_by_genre():
             x=-0.1,
         ),
         dragmode=False,
+        paper_bgcolor=Colors.transparent,
+        plot_bgcolor=Colors.transparent,
     )
 
     return fig

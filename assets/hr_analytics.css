@@ -155,8 +155,8 @@ body:has(.main-container.main-container--hr-analytics) {
     color: #ffffff;
 }
 
-.VirtualizedSelectOption {
-    background-color: #27293d; /* TODO: make specific for this dropdown */
+#hr_education_dropdown > .Select > .Select-menu-outer {
+    background-color: #27293d;;
 }
 
 .title-container--hr-analytics > div {

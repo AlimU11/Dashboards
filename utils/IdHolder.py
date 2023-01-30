@@ -1,7 +1,8 @@
-from enum import Enum, auto
+from .StrEnum import StrEnum, auto
 
 
-class IdHolder(Enum):
+class IdHolder(StrEnum):
+
     home = auto()
 
     UNDEFINED = auto()
@@ -75,11 +76,6 @@ class IdHolder(Enum):
     vg_genre_11 = auto()
     vg_genre_12 = auto()
 
-    ###
-
-    market_prices = auto()
-    market_prices_graph = auto()
-
     #  HR Analytics
     hr_analytics = auto()
 
@@ -128,3 +124,49 @@ class IdHolder(Enum):
     sp_avg_calls_graph = auto()
     sp_area_code_graph = auto()
     sp_fees_by_model_team_graph = auto()
+    sp_training_models_graph = auto()
+    sp_sales_by_team_graph = auto()
+    sp_fees_by_consultant_graph = auto()
+    sp_courses_by_time_graph = auto()
+    sp_paid_unpdaid_calls_graph = auto()
+    sp_sales_by_concultant_graph = auto()
+    sp_advertisements_graph = auto()
+
+    sp_sales_team_radio = auto()
+    sp_sales_month_radio = auto()
+
+    sp_show_data_by_team_button = auto()
+    sp_show_data_by_month_button = auto()
+
+    sp_team_offcanvas = auto()
+    sp_team_offcanvas_data_container = auto()
+
+    sp_month_offcanvas = auto()
+    sp_month_offcanvas_data_container = auto()
+
+    sp_top_training_levels_title = auto()
+    sp_top_training_levels_container = auto()
+
+    sp_top_consultants_fee_title = auto()
+    sp_top_consultants_fee_container = auto()
+
+    sp_advertisements_input = auto()
+    sp_advertisements_input_group = auto()
+
+    sp_total_earnings_title = auto()
+    sp_total_earnings_description = auto()
+
+    sp_total_paid_calls_title = auto()
+    sp_total_paid_calls_description = auto()
+
+    sp_training_levels_fees_graph = auto()
+    sp_training_levels_courses_graph = auto()
+
+    sp_average_call_title = auto()
+    sp_average_call_graph = auto()
+
+    sp_fees_by_month_graph = auto()
+    sp_fees_by_month_title = auto()
+
+    sp_advertisement_channel_graph = auto()
+    sp_advertisement_channel_title = auto()

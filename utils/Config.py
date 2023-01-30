@@ -1,7 +1,7 @@
 import plotly.graph_objects as go
 from pydantic import BaseSettings
 
-from utils.PreviewGraphs import preview_graphs as pg
+from .PreviewGraphs import preview_graphs as pg
 
 
 class Config(BaseSettings):
@@ -44,6 +44,7 @@ class Config(BaseSettings):
     hr_default_bin_size: int = 3
 
     sp_data_path: str = 'data/sp Data.xlsx'
+    sp_default_total_advetisement: int = 5
 
 
 config = Config()

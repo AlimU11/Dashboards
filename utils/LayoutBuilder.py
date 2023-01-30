@@ -8,7 +8,7 @@ from dash.development.base_component import Component
 from plotly.graph_objects import Figure
 
 from .Config import config
-from .IdHolder import IdHolder
+from .IdHolder import IdHolder as ID
 
 
 class LayoutBuilder:
@@ -56,7 +56,7 @@ class LayoutBuilder:
         project_class: str,
         title: str | Component | None,
         children: str | Sequence[Component],
-        callback_dispatcher_id: str = IdHolder.UNDEFINED.name,
+        callback_dispatcher_id: str = ID.UNDEFINED,
     ) -> Component:
         """Layout template for all project pages"""
         return html.Div(
@@ -88,7 +88,7 @@ class LayoutBuilder:
                 html.A(
                     children=html.I(className='fa-solid fa-house-chimney'),
                     href='/',
-                    id=IdHolder.home.name,
+                    id=ID.home,
                 ),
                 *[
                     html.A(
@@ -97,20 +97,20 @@ class LayoutBuilder:
                         ),
                         href=f'/{project.name.lower().replace(" ", "-")}',
                         id=getattr(
-                            IdHolder,
+                            ID,
                             project.name.lower().replace(' ', '_'),
-                        ).name,
+                        ),
                     )
                     for project in config.projects
                 ],
-                dbc.Tooltip('Home', target=IdHolder.home.name),
+                dbc.Tooltip('Home', target=ID.home.name),
                 *[
                     dbc.Tooltip(
                         project.name,
                         target=getattr(
-                            IdHolder,
+                            ID,
                             project.name.lower().replace(' ', '_'),
-                        ).name,
+                        ),
                     )
                     for project in config.projects
                 ],
@@ -120,9 +120,9 @@ class LayoutBuilder:
 
     @staticmethod
     def kpi_card(
-        title: str,
+        title: str | Component,
         title_size: int | str,
-        description: str,
+        description: str | Component,
         title_id: str,
         description_id: str,
     ) -> Component:
@@ -153,7 +153,7 @@ class LayoutBuilder:
         graph_id: str,
         title: str | Component = '',
         title_size: int | str = 1,
-        title_id: str = IdHolder.UNDEFINED.name,
+        title_id: str = ID.UNDEFINED,
         config: dict = {'displayModeBar': False},
         controls=None,
     ) -> Component:
@@ -168,7 +168,7 @@ class LayoutBuilder:
                         style={
                             'display': 'none',
                         }
-                        if title_id == IdHolder.UNDEFINED.name
+                        if title_id == ID.UNDEFINED
                         else {},
                     ),
                     controls,

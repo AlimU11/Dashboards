@@ -1,9 +1,9 @@
 from dash import Input, Output, State, callback, html
 
-from utils import IdHolder, data
+from utils import IdHolder as ID
+from utils import data
 
 from .utils import (
-    genres_dict,
     get_genres,
     get_kpi_descriptions,
     get_sales_amount,
@@ -18,21 +18,20 @@ from .utils import (
     plot_region_platform_genre,
     plot_sales_by_publisher,
     plot_top_games,
-    region_dict,
     update_app_data,
 )
 
 
 @callback(
-    Output(IdHolder.vg_callback_dispatcher.name, 'n_clicks'),
+    Output(ID.vg_callback_dispatcher, 'n_clicks'),
     [
-        Input(IdHolder.vg_callback_dispatcher.name, 'n_clicks'),
-        Input(IdHolder.vg_years_range.name, 'value'),
-        Input(IdHolder.vg_region.name, 'value'),
+        Input(ID.vg_callback_dispatcher, 'n_clicks'),
+        Input(ID.vg_years_range, 'value'),
+        Input(ID.vg_region, 'value'),
     ],
     [
-        State(IdHolder.vg_top_n_games.name, 'value'),
-        State(IdHolder.vg_top_n_publishers.name, 'value'),
+        State(ID.vg_top_n_games, 'value'),
+        State(ID.vg_top_n_publishers, 'value'),
     ],
 )
 def dispatcher(_, years_range, region, top_n_games, top_n_publishers):
@@ -41,10 +40,10 @@ def dispatcher(_, years_range, region, top_n_games, top_n_publishers):
 
 
 @callback(
-    Output(IdHolder.vg_by_publisher.name, 'figure'),
+    Output(ID.vg_by_publisher, 'figure'),
     [
-        Input(IdHolder.vg_callback_dispatcher.name, 'n_clicks'),
-        Input(IdHolder.vg_top_n_publishers.name, 'value'),
+        Input(ID.vg_callback_dispatcher, 'n_clicks'),
+        Input(ID.vg_top_n_publishers, 'value'),
     ],
 )
 def update_by_publisher(_, top_n_publishers):
@@ -53,10 +52,10 @@ def update_by_publisher(_, top_n_publishers):
 
 
 @callback(
-    Output(IdHolder.vg_top_games.name, 'figure'),
+    Output(ID.vg_top_games, 'figure'),
     [
-        Input(IdHolder.vg_callback_dispatcher.name, 'n_clicks'),
-        Input(IdHolder.vg_top_n_games.name, 'value'),
+        Input(ID.vg_callback_dispatcher, 'n_clicks'),
+        Input(ID.vg_top_n_games, 'value'),
     ],
 )
 def update_top_games(_, top_n_games):
@@ -65,10 +64,10 @@ def update_top_games(_, top_n_games):
 
 
 @callback(
-    Output(IdHolder.vg_by_genre.name, 'figure'),
+    Output(ID.vg_by_genre, 'figure'),
     [
-        Input(IdHolder.vg_callback_dispatcher.name, 'n_clicks'),
-        Input(IdHolder.vg_top_n_publishers.name, 'value'),
+        Input(ID.vg_callback_dispatcher, 'n_clicks'),
+        Input(ID.vg_top_n_publishers, 'value'),
     ],
 )
 def update_by_genre(_, top_n_publishers):
@@ -77,32 +76,32 @@ def update_by_genre(_, top_n_publishers):
 
 
 @callback(
-    Output(IdHolder.vg_genre_by_year.name, 'figure'),
-    Input(IdHolder.vg_callback_dispatcher.name, 'n_clicks'),
+    Output(ID.vg_genre_by_year, 'figure'),
+    Input(ID.vg_callback_dispatcher, 'n_clicks'),
 )
 def update_genre_by_year(_):
     return plot_genre_by_year()
 
 
 @callback(
-    Output(IdHolder.vg_genre_by_platform.name, 'figure'),
-    Input(IdHolder.vg_callback_dispatcher.name, 'n_clicks'),
+    Output(ID.vg_genre_by_platform, 'figure'),
+    Input(ID.vg_callback_dispatcher, 'n_clicks'),
 )
 def update_genre_by_platform(_):
     return plot_genre_by_platform()
 
 
 @callback(
-    Output(IdHolder.vg_region_platform_genre.name, 'figure'),
-    Input(IdHolder.vg_callback_dispatcher.name, 'n_clicks'),
+    Output(ID.vg_region_platform_genre, 'figure'),
+    Input(ID.vg_callback_dispatcher, 'n_clicks'),
 )
 def update_region_platform_genre(_):
     return plot_region_platform_genre()
 
 
 @callback(
-    Output(IdHolder.vg_rank_by_year.name, 'figure'),
-    Input(IdHolder.vg_callback_dispatcher.name, 'n_clicks'),
+    Output(ID.vg_rank_by_year, 'figure'),
+    Input(ID.vg_callback_dispatcher, 'n_clicks'),
 )
 def update_rank_by_year(_):
     return plot_rank_by_year()
@@ -110,25 +109,25 @@ def update_rank_by_year(_):
 
 @callback(
     [
-        Output(IdHolder.vg_sales_amount_title.name, 'children'),
-        Output(IdHolder.vg_top_game_title.name, 'children'),
-        Output(IdHolder.vg_top_freq_platform_title.name, 'children'),
-        Output(IdHolder.vg_trending_genre_title.name, 'children'),
-        Output(IdHolder.vg_sales_amount_description.name, 'children'),
-        Output(IdHolder.vg_top_game_description.name, 'children'),
-        Output(IdHolder.vg_top_freq_platform_description.name, 'children'),
-        Output(IdHolder.vg_trending_genre_description.name, 'children'),
+        Output(ID.vg_sales_amount_title, 'children'),
+        Output(ID.vg_top_game_title, 'children'),
+        Output(ID.vg_top_freq_platform_title, 'children'),
+        Output(ID.vg_trending_genre_title, 'children'),
+        Output(ID.vg_sales_amount_description, 'children'),
+        Output(ID.vg_top_game_description, 'children'),
+        Output(ID.vg_top_freq_platform_description, 'children'),
+        Output(ID.vg_trending_genre_description, 'children'),
     ],
-    Input(IdHolder.vg_callback_dispatcher.name, 'n_clicks'),
+    Input(ID.vg_callback_dispatcher, 'n_clicks'),
     [
-        State(IdHolder.vg_top_game_title.name, 'children'),
-        State(IdHolder.vg_top_freq_platform_title.name, 'children'),
-        State(IdHolder.vg_trending_genre_title.name, 'children'),
-        State(IdHolder.vg_trending_genre_description.name, 'children'),
+        State(ID.vg_top_game_title, 'children'),
+        State(ID.vg_top_freq_platform_title, 'children'),
+        State(ID.vg_trending_genre_title, 'children'),
+        State(ID.vg_trending_genre_description, 'children'),
     ],
 )
 def update_kpi(_, __, ___, ____, _____):
-    region = region_dict[data.vg.region]
+    region = getattr(data.vg.Region, data.vg.region.lower())
 
     platform = get_top_freq_platform()
 
@@ -140,7 +139,7 @@ def update_kpi(_, __, ___, ____, _____):
         platform,
         (
             [
-                html.I(className=f'fa-solid {genres_dict[genre]}'),
+                html.I(className=f'''fa-solid {getattr(data.vg.Genre, str(genre).lower().replace('-', '_'))}'''),
                 html.Span(genre),
                 html.I(className='fa-solid fa-arrow-trend-up'),
             ]
@@ -158,32 +157,32 @@ def update_kpi(_, __, ___, ____, _____):
 
 @callback(
     [
-        Output(IdHolder.vg_genre_1_title.name, 'children'),
-        Output(IdHolder.vg_genre_2_title.name, 'children'),
-        Output(IdHolder.vg_genre_3_title.name, 'children'),
-        Output(IdHolder.vg_genre_4_title.name, 'children'),
-        Output(IdHolder.vg_genre_5_title.name, 'children'),
-        Output(IdHolder.vg_genre_6_title.name, 'children'),
-        Output(IdHolder.vg_genre_7_title.name, 'children'),
-        Output(IdHolder.vg_genre_8_title.name, 'children'),
-        Output(IdHolder.vg_genre_9_title.name, 'children'),
-        Output(IdHolder.vg_genre_10_title.name, 'children'),
-        Output(IdHolder.vg_genre_11_title.name, 'children'),
-        Output(IdHolder.vg_genre_12_title.name, 'children'),
-        Output(IdHolder.vg_genre_1.name, 'children'),
-        Output(IdHolder.vg_genre_2.name, 'children'),
-        Output(IdHolder.vg_genre_3.name, 'children'),
-        Output(IdHolder.vg_genre_4.name, 'children'),
-        Output(IdHolder.vg_genre_5.name, 'children'),
-        Output(IdHolder.vg_genre_6.name, 'children'),
-        Output(IdHolder.vg_genre_7.name, 'children'),
-        Output(IdHolder.vg_genre_8.name, 'children'),
-        Output(IdHolder.vg_genre_9.name, 'children'),
-        Output(IdHolder.vg_genre_10.name, 'children'),
-        Output(IdHolder.vg_genre_11.name, 'children'),
-        Output(IdHolder.vg_genre_12.name, 'children'),
+        Output(ID.vg_genre_1_title, 'children'),
+        Output(ID.vg_genre_2_title, 'children'),
+        Output(ID.vg_genre_3_title, 'children'),
+        Output(ID.vg_genre_4_title, 'children'),
+        Output(ID.vg_genre_5_title, 'children'),
+        Output(ID.vg_genre_6_title, 'children'),
+        Output(ID.vg_genre_7_title, 'children'),
+        Output(ID.vg_genre_8_title, 'children'),
+        Output(ID.vg_genre_9_title, 'children'),
+        Output(ID.vg_genre_10_title, 'children'),
+        Output(ID.vg_genre_11_title, 'children'),
+        Output(ID.vg_genre_12_title, 'children'),
+        Output(ID.vg_genre_1, 'children'),
+        Output(ID.vg_genre_2, 'children'),
+        Output(ID.vg_genre_3, 'children'),
+        Output(ID.vg_genre_4, 'children'),
+        Output(ID.vg_genre_5, 'children'),
+        Output(ID.vg_genre_6, 'children'),
+        Output(ID.vg_genre_7, 'children'),
+        Output(ID.vg_genre_8, 'children'),
+        Output(ID.vg_genre_9, 'children'),
+        Output(ID.vg_genre_10, 'children'),
+        Output(ID.vg_genre_11, 'children'),
+        Output(ID.vg_genre_12, 'children'),
     ],
-    Input(IdHolder.vg_callback_dispatcher.name, 'n_clicks'),
+    Input(ID.vg_callback_dispatcher, 'n_clicks'),
 )
 def update_genres(_):
     return get_genres()
@@ -191,16 +190,16 @@ def update_genres(_):
 
 @callback(
     [
-        Output(IdHolder.vg_by_publisher_title.name, 'children'),
-        Output(IdHolder.vg_by_genre_title.name, 'children'),
-        Output(IdHolder.vg_genre_by_year_title.name, 'children'),
-        Output(IdHolder.vg_genre_by_platform_title.name, 'children'),
-        Output(IdHolder.vg_rank_by_year_title.name, 'children'),
-        Output(IdHolder.vg_top_games_title.name, 'children'),
+        Output(ID.vg_by_publisher_title, 'children'),
+        Output(ID.vg_by_genre_title, 'children'),
+        Output(ID.vg_genre_by_year_title, 'children'),
+        Output(ID.vg_genre_by_platform_title, 'children'),
+        Output(ID.vg_rank_by_year_title, 'children'),
+        Output(ID.vg_top_games_title, 'children'),
     ],
-    Input(IdHolder.vg_callback_dispatcher.name, 'n_clicks'),
+    Input(ID.vg_callback_dispatcher, 'n_clicks'),
 )
 def update_titles(_):
-    region = region_dict[data.vg.region]
+    region = getattr(data.vg.Region, data.vg.region.lower())
 
     return get_titles(region)

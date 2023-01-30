@@ -1,186 +1,470 @@
 /*
-grid 17 width x 16 height
-*/
+body {
+    background-color: hsl(0, 5%, 95%);
+} */
 
-.main-container.main-container--sales-performance {
-    background-color: hsl(240, 22%, 35%);
-    color: #fff;
+/* .page-container:has(.main-container--sales-performance) {
+    background-color: hsl(0, 5%, 95%);
+} */
+
+h1 {
+    font-weight: bold;
 }
 
+.main-container.main-container--sales-performance {
+    padding: 0;
+}
+
+.main-grid.main-grid--sales-performance {
+    display: flex;
+    flex-wrap: wrap;
+}
 
 .main-grid.main-grid--sales-performance > .card {
     border-radius: 10px;
     margin: 0.5rem;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 .main-grid--sales-performance > div:nth-child(1) {
-    background-color: red;
     height: 14rem;
-    width: 17.3rem;
-
-    grid-row: 1/5;
-    grid-column: 1/4;
+    width: 21.8rem;
+    padding-left: 1rem;
 }
 
 .main-grid--sales-performance > div:nth-child(2) {
-    background-color: green;
     height: 14rem;
-    width: 11.75rem;
-
-    grid-row: 1/5;
-    grid-column: 4/6;
+    width: 13rem;
 }
 
 .main-grid--sales-performance > div:nth-child(3) {
-    background-color: blue;
     height: 14rem;
-    width: 35.625rem;
-
-    grid-row: 1/5;
-    grid-column: 6/12;
+    width: 35.8rem;
 }
 
 .main-grid--sales-performance > div:nth-child(4) {
-    background-color: yellow;
     height: 14rem;
-    width: 11.75rem;
-
-    grid-row: 1/5;
-    grid-column: 12/14;
+    width: 13rem;
 }
 
 .main-grid--sales-performance > div:nth-child(5) {
-    background-color: orange;
-    height: 14rem;
-    width: 11.75rem;
+    background-color: rgb(99, 110, 250);
+    color: white;
 
-    grid-row: 1/5;
-    grid-column: 14/16;
+    height: 14rem;
+    width: 11rem;
 }
 
 .main-grid--sales-performance > div:nth-child(6) {
-    background-color: purple;
     height: 14rem;
-    width: 11.75rem;
-
-    grid-row: 1/5;
-    grid-column: 16/18;
+    width: 10.3rem;
 }
 
 .main-grid--sales-performance > div:nth-child(7) {
-    background-color: pink;
     height: 24.5rem;
-    width: 17.3rem;
-
-    grid-row: 5/12;
-    grid-column: 1/4;
+    width: 21.8rem;
 }
 
 .main-grid--sales-performance > div:nth-child(8) {
-    background-color: black;
     height: 14rem;
-    width: 35.625rem;
-
-    grid-row: 5/9;
-    grid-column: 4/10;
+    width: 36rem;
 }
 
 .main-grid--sales-performance > div:nth-child(9) {
     background-color: white;
     color: black;
     height: 14rem;
-    width: 11.75rem;
-
-
-    grid-row: 5/9;
-    grid-column: 10/12;
+    width: 12.8rem;
 }
 
 .main-grid--sales-performance > div:nth-child(10) {
-    background-color: grey;
     height: 29rem; /* TODO: ???*/
-
-    grid-row: 5/13;
-    grid-column: 12/15;
+    width: 18.6rem;
 }
 
 .main-grid--sales-performance > div:nth-child(11) {
     height: 14rem;
-
-    grid-row: 5/9;
-    grid-column: 15/18;
+    width: 16.7rem;
 }
 
 .main-grid--sales-performance > div:nth-child(12) {
     height: 3.5rem;
-    width: 17.3rem;
-
-    grid-row: 12/13;
-    grid-column: 1/4;
-}
-
-/* TODO: refactor */
-
-.main-grid--sales-performance > div:nth-child(11) > .card-body,
-.main-grid--sales-performance > div:nth-child(12) > .card-body {
-    padding: 0;
+    width: 21.8rem;
+    margin-top: -4rem !important;
 }
 
 .main-grid--sales-performance > div:nth-child(13) {
-    background-color: magenta;
     height: 14rem;
-
-    grid-row: 9/13;
-    grid-column: 4/7;
+    width: 20rem;
+    margin-top: -14.5rem !important;
 }
 
 .main-grid--sales-performance > div:nth-child(14) {
-    background-color: gold;
     height: 14rem;
-    width: 29rem;
-
-    grid-row: 9/13;
-    grid-column: 7/12;
+    width: 28.8rem;
+    margin-top: -14.5rem !important;
 }
 
 .main-grid--sales-performance > div:nth-child(15) {
-    background-color: silver;
     height: 14rem;
-
-    grid-row: 9/13;
-    grid-column: 15/18;
+    width: 16.8rem;
+    margin-top: -14.5rem !important;
+    margin-left: 20rem !important;
 }
 
 .main-grid--sales-performance > div:nth-child(16) {
-    background-color: olive;
     height: 14rem;
-
-    grid-row:13/17;
-    grid-column: 1/6;
+    width: 36rem;
 }
 
 .main-grid--sales-performance > div:nth-child(17) {
-    background-color: teal;
-    height: 14rem;
-    width: 11.75rem;
+    background-color: rgb(99, 110, 250);
+    color: white;
 
-    grid-row:13/17;
-    grid-column: 6/8;
+    height: 14rem;
+    width: 11rem;
 }
 
 .main-grid--sales-performance > div:nth-child(18) {
     height: 14rem;
-    width: 22.5rem;
+    width: 23.6rem;
+}
 
-    grid-row:13/17;
-    grid-column: 8/12;
+.main-grid--sales-performance > div:nth-child(19) {
+    height: 14rem;
+    width: 36.3rem;
+}
+
+.main-grid--sales-performance > div > .card-body {
+    padding: 0;
+}
+
+.main-grid--sales-performance > div:nth-child(17) > h6,
+.main-grid--sales-performance > div:nth-child(5) > h6 {
+    font-weight: bold;
+    margin-left: 1rem;
+    margin-top: 0.75rem;
+}
+
+.main-grid--sales-performance > div:nth-child(17) > hr {
+    margin: 0rem 1rem 1rem;
+    background-color: white;
+    width: 60%;
+}
+
+#sp_sales_team_radio > .form-check,
+#sp_sales_month_radio > .form-check {
+    padding-left: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+#sp_sales_team_radio > .form-check > input,
+#sp_sales_month_radio > .form-check > input {
+    display: none;
+}
+
+#sp_sales_team_radio > .form-check > label,
+#sp_sales_month_radio > .form-check > label {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#sp_sales_team_radio > .form-check > input:checked + label,
+#sp_sales_month_radio > .form-check > input:checked + label {
+    text-decoration: underline;
+}
+
+#sp_sales_month_radio {
+    display: flex;
+    margin-top: 1.5rem;
+    margin-left: 0.5rem;
+    flex-wrap: wrap;
+}
+
+#sp_show_data_by_team_button,
+#sp_show_data_by_month_button {
+    position: absolute;
+    width: fit-content;
+    right: 0;
+}
+
+#sp_team_offcanvas,
+#sp_month_offcanvas {
+    width: 50%;
+    font-size: 12px;
+}
+
+#sp_top_training_levels_container > div,
+#sp_top_consultants_fee_container > div {
+    line-height: 1.75rem;
+    font-size: 14px;
+}
+
+#sp_top_training_levels_title > div > h6,
+#sp_top_consultants_fee_title > div > h6 {
+    font-size: 0.75rem;
+    margin-bottom: 0;
+}
+
+#sp_top_training_levels_title > div > h5,
+#sp_top_consultants_fee_title > div > h5 {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: bold;
+}
+
+#sp_top_training_levels_title > div > i,
+#sp_top_consultants_fee_title > div > i {
+    font-size: 1rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+#sp_top_training_levels_title,
+#sp_top_consultants_fee_title {
+    margin: 0;
+}
+
+#sp_top_training_levels_title > div,
+#sp_top_consultants_fee_title > div {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+#sp_top_training_levels_container,
+#sp_top_consultants_fee_container {
+    margin: 0 1.2rem;
+}
+
+#sp_top_training_levels_container > div > div,
+#sp_top_consultants_fee_container > div > div {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#sp_advertisements_input_group {
+    position: absolute;
+    width: 13rem;
+    right: 0.5rem;
+    top: 0.5rem;
+    z-index: 1;
+}
+
+#sp_advertisements_input_group > input {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+#sp_advertisements_input_group > span {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color:rgb(99, 110, 250);
+    color: white;
+}
+
+.main-grid--sales-performance > div:nth-child(1) > div > .card {
+    border: none;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+.main-grid--sales-performance > div:nth-child(1) > div > .card:first-child > .card-body {
+    padding-bottom: 0;
+}
+
+#sp_total_earnings_description > div > span:first-child,
+#sp_total_paid_calls_description > div > span:first-child {
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+#sp_total_earnings_description > div > span:last-child,
+#sp_total_paid_calls_description > div > span:last-child {
+    font-size: 0.9rem;
+    color: rgb(153, 153, 153);
+    font-weight: bold;
+}
+
+.main-grid--sales-performance > div:nth-child(1) > div > .fa-money-bill-wave {
+    position: absolute;
+    font-size: 2rem;
+    right: 4rem;
+    top: 2.7rem;
+}
+
+.main-grid--sales-performance > div:nth-child(1) > div > .fa-phone-volume {
+    position: absolute;
+    font-size: 1.7rem;
+    right: 14rem;
+    bottom: 3rem;
 }
 
 
-.main-grid--sales-performance > div:nth-child(19) {
-    background-color: maroon;
-    height: 14rem;
+.main-grid--sales-performance > div:nth-child(10) > .card {
+    border: none;
+    border-radius: 10px;
+    background-color: transparent;
+}
 
-    grid-row:13/17;
-    grid-column: 12/18;
+.main-grid--sales-performance > div:nth-child(10) > .card > .card-body {
+    padding: 0;
+}
+
+.main-grid--sales-performance > div:nth-child(8) > .card-body {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#sp_average_call_title > div {
+    font-size: 0.75rem;
+    width: 13rem;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+#sp_average_call_title > div > div:nth-child(1) {
+    font-size: 0.95rem;
+    margin-right: 5rem;
+}
+
+#sp_average_call_title > div > div:nth-child(2) {
+    font-size: 1.1rem;
+}
+
+#sp_average_call_title > div > div:nth-child(3) {
+    font-size: 0.85rem;
+    color:rgb(153, 153, 153);
+    margin-right: 5rem;
+    margin-bottom: 1rem;
+}
+
+#sp_average_call_title > div > div:nth-child(4) {
+    font-size: 1rem;
+    color:white;
+    background-color: rgb(99, 110, 250);
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+#sp_average_call_title > div > div:nth-child(5) {
+    margin-left: 1rem;
+    margin-right: 1.5rem;
+}
+
+#sp_average_call_title > div > div:nth-child(5),
+#sp_average_call_title > div > div:nth-child(6) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sp_average_call_title > div > div:nth-child(5) > span:nth-child(1),
+#sp_average_call_title > div > div:nth-child(6) > span:nth-child(1) {
+    font-size: 1rem;
+}
+
+#sp_average_call_title > div > div:nth-child(5) > span:nth-child(2),
+#sp_average_call_title > div > div:nth-child(6) > span:nth-child(2) {
+    font-size: 0.6rem;
+    color:rgb(153, 153, 153);
+}
+
+#sp_average_call_title > div > div:nth-child(5) > span:nth-child(3),
+#sp_average_call_title > div > div:nth-child(6) > span:nth-child(3) {
+    font-size: 1rem;
+}
+
+#sp_average_call_title > div > div:nth-child(5) > span:nth-child(4),
+#sp_average_call_title > div > div:nth-child(6) > span:nth-child(4) {
+    color:rgb(153, 153, 153);
+}
+
+#sp_fees_by_month_title > div {
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 3rem;
+}
+
+#sp_fees_by_month_title > div > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: -1rem;
+}
+
+#sp_fees_by_month_title > div > div > div:nth-child(2) {
+    font-size: 0.6rem;
+    color:rgb(153, 153, 153);
+}
+
+#sp_fees_by_month_title > div > div > div:nth-child(3) {
+    font-size: 1.1rem;
+    color:rgb(153, 153, 153);
+}
+
+#sp_fees_by_month_title > div > div > i {
+    position: relative;
+    bottom: 3rem;
+    right: 4rem;
+    font-size: 1.5rem;
+}
+
+#sp_fees_by_month_title > div > div:nth-child(1) > i {
+    color: rgb(0, 204, 150);
+}
+
+#sp_fees_by_month_title > div > div:nth-child(2) > i {
+    color: rgb(254, 203, 82);
+}
+
+#sp_fees_by_month_title > div > div:nth-child(3) > i {
+    color: rgb(220, 57, 18);
+}
+
+.main-grid--sales-performance > div:nth-child(3) > .card-body,
+.main-grid--sales-performance > div:nth-child(7) > .card-body {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#sp_advertisement_channel_title {
+    margin: 0;
+}
+
+#sp_advertisement_channel_title > div {
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: grid;
+    flex-wrap: wrap;
+    grid-template-rows: min-content;
+    grid-template-columns: min-content min-content;
+    align-items: baseline;
+    margin: 0rem 1rem;
+    margin-left: 2rem;
+    margin-top: 0.75rem;
+}
+
+#sp_advertisement_channel_title > div > div {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+#sp_advertisement_channel_title > div > :nth-child(even) {
+    margin-left: 3rem;
+}
+
+#sp_advertisement_channel_title > div > div > div {
+    width: 8rem;
 }

@@ -2,7 +2,7 @@
 
 # Dashboards
 
-A collection of dashboards made with Plotly Dash.
+Dashboards made with Plotly Dash.
 
 1. Video Game Sales - [https://www.kaggle.com/gregorut/videogamesales](https://www.kaggle.com/gregorut/videogamesales)
 
@@ -11,3 +11,7 @@ A collection of dashboards made with Plotly Dash.
 2. HR Analytics
 
 ![hr](assets/previews/hr.png)
+
+3. Sales Performance - [https://www.other-levels.com](https://www.other-levels.com)
+
+![sp](assets/previews/sp.png)

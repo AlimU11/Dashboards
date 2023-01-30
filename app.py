@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 from dash import html
 
 import projects
-from utils import LayoutBuilder as lb
+from utils import LayoutBuilder as LB
 from utils.Config import config
 
 app = dash.Dash(
@@ -33,7 +33,7 @@ dash.register_page(
             html.Div(
                 children=[
                     *[
-                        lb.project_card(
+                        LB.project_card(
                             title=project.name,
                             fig=project.fig,
                             description=project.description,

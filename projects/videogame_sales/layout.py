@@ -1,11 +1,12 @@
 import dash_bootstrap_components as dbc
 from dash import dcc, html
 
-from utils import IdHolder, data
-from utils.LayoutBuilder import LayoutBuilder as lb
+from utils import IdHolder as ID
+from utils import data
+from utils.LayoutBuilder import LayoutBuilder as LB
 
-layout = lb.layout(
-    callback_dispatcher_id=IdHolder.vg_callback_dispatcher.name,
+layout = LB.layout(
+    callback_dispatcher_id=ID.vg_callback_dispatcher,
     project_class='videogame-sales',
     title=html.H1('Video Game Sales'),
     children=[
@@ -19,7 +20,7 @@ layout = lb.layout(
                                 [
                                     html.Label('Years'),
                                     dcc.RangeSlider(
-                                        id=IdHolder.vg_years_range.name,
+                                        id=ID.vg_years_range,
                                         min=data.vg.data.Year.min(),
                                         max=data.vg.data.Year.max(),
                                         step=1,
@@ -72,7 +73,7 @@ layout = lb.layout(
                                         ],
                                         value='Global_Sales',
                                         clearable=False,
-                                        id=IdHolder.vg_region.name,
+                                        id=ID.vg_region,
                                     ),
                                 ],
                             ),
@@ -87,141 +88,141 @@ layout = lb.layout(
                 ),
                 html.Div(
                     children=[
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='$0M',
                             title_size=1,
                             description='Video Game Sales',
-                            title_id=IdHolder.vg_sales_amount_title.name,
-                            description_id=IdHolder.vg_sales_amount_description.name,
+                            title_id=ID.vg_sales_amount_title,
+                            description_id=ID.vg_sales_amount_description,
                         ),
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='None',
                             title_size=1,
                             description='$0M',
-                            title_id=IdHolder.vg_top_game_title.name,
-                            description_id=IdHolder.vg_top_game_description.name,
+                            title_id=ID.vg_top_game_title,
+                            description_id=ID.vg_top_game_description,
                         ),
                     ],
                     className='kpi-container',
                 ),
                 html.Div(
                     children=[
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='None',
                             title_size=1,
                             description='0',
-                            title_id=IdHolder.vg_top_freq_platform_title.name,
-                            description_id=IdHolder.vg_top_freq_platform_description.name,
+                            title_id=ID.vg_top_freq_platform_title,
+                            description_id=ID.vg_top_freq_platform_description,
                         ),
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='None',
                             title_size=1,
                             description='0',
-                            title_id=IdHolder.vg_trending_genre_title.name,
-                            description_id=IdHolder.vg_trending_genre_description.name,
+                            title_id=ID.vg_trending_genre_title,
+                            description_id=ID.vg_trending_genre_description,
                         ),
                     ],
                     className='kpi-container',
                 ),
                 html.Div(
                     [
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='Genre 1',
                             title_size=1,
                             description='0',
-                            title_id=IdHolder.vg_genre_1_title.name,
-                            description_id=IdHolder.vg_genre_1.name,
+                            title_id=ID.vg_genre_1_title,
+                            description_id=ID.vg_genre_1,
                         ),
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='Genre 2',
                             title_size=1,
                             description='0',
-                            title_id=IdHolder.vg_genre_2_title.name,
-                            description_id=IdHolder.vg_genre_2.name,
+                            title_id=ID.vg_genre_2_title,
+                            description_id=ID.vg_genre_2,
                         ),
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='Genre 3',
                             title_size=1,
                             description='0',
-                            title_id=IdHolder.vg_genre_3_title.name,
-                            description_id=IdHolder.vg_genre_3.name,
+                            title_id=ID.vg_genre_3_title,
+                            description_id=ID.vg_genre_3,
                         ),
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='Genre 4',
                             title_size=1,
                             description='0',
-                            title_id=IdHolder.vg_genre_4_title.name,
-                            description_id=IdHolder.vg_genre_4.name,
+                            title_id=ID.vg_genre_4_title,
+                            description_id=ID.vg_genre_4,
                         ),
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='Genre 5',
                             title_size=1,
                             description='0',
-                            title_id=IdHolder.vg_genre_5_title.name,
-                            description_id=IdHolder.vg_genre_5.name,
+                            title_id=ID.vg_genre_5_title,
+                            description_id=ID.vg_genre_5,
                         ),
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='Genre 6',
                             title_size=1,
                             description='0',
-                            title_id=IdHolder.vg_genre_6_title.name,
-                            description_id=IdHolder.vg_genre_6.name,
+                            title_id=ID.vg_genre_6_title,
+                            description_id=ID.vg_genre_6,
                         ),
                     ],
                     className='genre-container',
                 ),
                 html.Div(
                     [
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='Genre 7',
                             title_size=1,
                             description='0',
-                            title_id=IdHolder.vg_genre_7_title.name,
-                            description_id=IdHolder.vg_genre_7.name,
+                            title_id=ID.vg_genre_7_title,
+                            description_id=ID.vg_genre_7,
                         ),
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='Genre 8',
                             title_size=1,
                             description='0',
-                            title_id=IdHolder.vg_genre_8_title.name,
-                            description_id=IdHolder.vg_genre_8.name,
+                            title_id=ID.vg_genre_8_title,
+                            description_id=ID.vg_genre_8,
                         ),
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='Genre 9',
                             title_size=1,
                             description='0',
-                            title_id=IdHolder.vg_genre_9_title.name,
-                            description_id=IdHolder.vg_genre_9.name,
+                            title_id=ID.vg_genre_9_title,
+                            description_id=ID.vg_genre_9,
                         ),
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='Genre 10',
                             title_size=1,
                             description='0',
-                            title_id=IdHolder.vg_genre_10_title.name,
-                            description_id=IdHolder.vg_genre_10.name,
+                            title_id=ID.vg_genre_10_title,
+                            description_id=ID.vg_genre_10,
                         ),
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='Genre 11',
                             title_size=1,
                             description='0',
-                            title_id=IdHolder.vg_genre_11_title.name,
-                            description_id=IdHolder.vg_genre_11.name,
+                            title_id=ID.vg_genre_11_title,
+                            description_id=ID.vg_genre_11,
                         ),
-                        lb.kpi_card(
+                        LB.kpi_card(
                             title='Genre 12',
                             title_size=1,
                             description='0',
-                            title_id=IdHolder.vg_genre_12_title.name,
-                            description_id=IdHolder.vg_genre_12.name,
+                            title_id=ID.vg_genre_12_title,
+                            description_id=ID.vg_genre_12,
                         ),
                     ],
                     className='genre-container',
                 ),
-                lb.graph_card(
+                LB.graph_card(
                     title='Sales by Publisher over the Years',
                     title_size=4,
-                    title_id=IdHolder.vg_by_publisher_title.name,
-                    graph_id=IdHolder.vg_by_publisher.name,
+                    title_id=ID.vg_by_publisher_title,
+                    graph_id=ID.vg_by_publisher,
                     controls=dbc.InputGroup(
                         [
                             dbc.InputGroupText(
@@ -230,56 +231,56 @@ layout = lb.layout(
                             dbc.Input(
                                 type='number',
                                 value=data.vg.top_n_publishers,
-                                id=IdHolder.vg_top_n_publishers.name,
+                                id=ID.vg_top_n_publishers,
                             ),
                         ],
                     ),
                 ),
-                lb.graph_card(
+                LB.graph_card(
                     title='Sales by Genre and Publisher',
                     title_size=4,
-                    title_id=IdHolder.vg_by_genre_title.name,
-                    graph_id=IdHolder.vg_by_genre.name,
+                    title_id=ID.vg_by_genre_title,
+                    graph_id=ID.vg_by_genre,
                 ),
-                lb.graph_card(
+                LB.graph_card(
                     title='Top Games',
                     title_size=4,
-                    title_id=IdHolder.vg_top_games_title.name,
-                    graph_id=IdHolder.vg_top_games.name,
+                    title_id=ID.vg_top_games_title,
+                    graph_id=ID.vg_top_games,
                     controls=dbc.InputGroup(
                         [
                             dbc.InputGroupText('Number of Games'),
                             dbc.Input(
                                 type='number',
                                 value=data.vg.top_n_games,
-                                id=IdHolder.vg_top_n_games.name,
+                                id=ID.vg_top_n_games,
                             ),
                         ],
                     ),
                 ),
-                lb.graph_card(
+                LB.graph_card(
                     title='Sales by Genre over the Years',
                     title_size=4,
-                    title_id=IdHolder.vg_genre_by_year_title.name,
-                    graph_id=IdHolder.vg_genre_by_year.name,
+                    title_id=ID.vg_genre_by_year_title,
+                    graph_id=ID.vg_genre_by_year,
                 ),
-                lb.graph_card(
+                LB.graph_card(
                     title='Sales by Genre and Platform',
                     title_size=4,
-                    title_id=IdHolder.vg_genre_by_platform_title.name,
-                    graph_id=IdHolder.vg_genre_by_platform.name,
+                    title_id=ID.vg_genre_by_platform_title,
+                    graph_id=ID.vg_genre_by_platform,
                 ),
-                lb.graph_card(
+                LB.graph_card(
                     title='Sales by Rank over the Years',
                     title_size=4,
-                    title_id=IdHolder.vg_rank_by_year_title.name,
-                    graph_id=IdHolder.vg_rank_by_year.name,
+                    title_id=ID.vg_rank_by_year_title,
+                    graph_id=ID.vg_rank_by_year,
                 ),
-                lb.graph_card(
+                LB.graph_card(
                     title='Sales by Region, Platform and Genre',
                     title_size=4,
-                    title_id=IdHolder.vg_region_platform_genre_title.name,
-                    graph_id=IdHolder.vg_region_platform_genre.name,
+                    title_id=ID.vg_region_platform_genre_title,
+                    graph_id=ID.vg_region_platform_genre,
                 ),
             ],
             className='main-grid main-grid--video-game-sales',

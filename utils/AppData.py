@@ -6,11 +6,32 @@ import pandas as pd
 from pandas import DataFrame, Series
 
 from .Config import config
+from .StrEnum import StrEnum
 
 
 class AppData:
     @dataclass
     class VideogameSales:
+        class Region(StrEnum):
+            global_sales = 'Globally'
+            na_sales = 'in North America'
+            eu_sales = 'in Europe'
+            jp_sales = 'in Japan'
+            other_sales = 'in other regions'
+
+        class Genre(StrEnum):
+            action = 'fa-dragon'
+            adventure = 'fa-compass'
+            fighting = 'fa-fist-raised'
+            misc = 'fa-circle-question'
+            platform = 'fa-gamepad'
+            puzzle = 'fa-puzzle-piece'
+            racing = 'fa-car'
+            role_playing = 'fa-masks-theater'
+            shooter = 'fa-gun'
+            simulation = 'fa-robot'
+            sports = 'fa-futbol'
+            strategy = 'fa-chess'
 
         data: DataFrame
         data_region: DataFrame
@@ -95,13 +116,33 @@ class AppData:
     @dataclass
     class SalesPerformance:
 
-        data: DataFrame
+        _data: DataFrame
+        sales_month: list[str]
+        unique_months: list[str]
+        sales_team: list[str]
+        unique_teams: list[str]
 
         def __init__(self) -> None:
             self.__read_data()
 
         def __read_data(self) -> None:
-            self.data = pd.read_excel(config.sp_data_path)
+            ordered_months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+            self._data = pd.read_excel(config.sp_data_path)
+            self._data.Month = pd.Categorical(self._data.Month, categories=ordered_months, ordered=True)
+            self._data.sort_values(by=['Month'], inplace=True)
+            self.unique_months = self._data.Month.unique().tolist()
+            self.sales_month = self.unique_months
+            self.unique_teams = self._data['Sale Team'].unique().tolist()
+            self.sales_team = self.unique_teams
+
+        @property
+        def raw_data(self) -> DataFrame:
+            return self._data
+
+        @property
+        def data(self) -> DataFrame:
+            return self._data.query('`Sale Team` in @self.sales_team and Month in @self.sales_month')
 
     def __init__(self) -> None:
         self.__vg: AppData.VideogameSales = AppData.VideogameSales()

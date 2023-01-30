@@ -4,7 +4,8 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-from utils.AppData import data
+from utils import data
+from utils.Colors import Colors
 
 
 def get_kpi():
@@ -34,7 +35,7 @@ def plot_attrition_by_gender():
             x=[by_gender.values[0]],
             y=[by_gender.index[0]],
             orientation='h',
-            marker_color=['#636EFA'],
+            marker_color=[Colors.blue],
             showlegend=False,
             textposition='outside',
             text=[by_gender.values[0]],
@@ -46,7 +47,7 @@ def plot_attrition_by_gender():
             x=[by_gender.values[1]],
             y=[by_gender.index[1]],
             orientation='h',
-            marker_color=['#FF6692'],
+            marker_color=[Colors.pink],
             showlegend=False,
             textposition='outside',
             text=[by_gender.values[1]],
@@ -70,10 +71,10 @@ def plot_attrition_by_gender():
         font=dict(
             size=16,
             family='Inter',
-            color='#FFFFFF',
+            color=Colors.white,
         ),
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor=Colors.transparent,
+        plot_bgcolor=Colors.transparent,
     )
     return fig
 
@@ -108,10 +109,10 @@ def plot_attrition_by_department():
         font=dict(
             family='Inter',
             size=16,
-            color='#FFFFFF',
+            color=Colors.white,
         ),
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor=Colors.transparent,
+        plot_bgcolor=Colors.transparent,
     )
 
     return fig
@@ -171,14 +172,14 @@ def plot_employees_by_age(binsize):
         margin=dict(l=0, r=0, t=0, b=0),
         font=dict(
             family='Inter',
-            color='#FFFFFF',
+            color=Colors.white,
         ),
         legend=dict(
             orientation='h',
             y=1.2,
         ),
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor=Colors.transparent,
+        plot_bgcolor=Colors.transparent,
     )
 
     return fig
@@ -263,10 +264,10 @@ def plot_attrition_by_education():
         margin=dict(l=0, r=25, t=25, b=25),
         font=dict(
             family='Inter',
-            color='#FFFFFF',
+            color=Colors.white,
         ),
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor=Colors.transparent,
+        plot_bgcolor=Colors.transparent,
         bargap=0.2,
     )
 
@@ -292,7 +293,7 @@ def plot_attrition_by_gender_age():
     )
 
     groups = groups.query('Attrition > 0').assign(
-        color=lambda _df: _df.Gender.apply(lambda x: '#FF6692' if x == 'Female' else '#636EFA'),
+        color=lambda _df: _df.Gender.apply(lambda x: Colors.pink if x == 'Female' else Colors.blue),
     )
 
     fig = make_subplots(
@@ -314,7 +315,7 @@ def plot_attrition_by_gender_age():
                 marker_colors=pie_group.color.unique(),
                 textfont=dict(
                     size=15,
-                    color='#FFFFFF',
+                    color=Colors.white,
                 ),
                 name=age_group,
                 title=dict(
@@ -342,10 +343,10 @@ def plot_attrition_by_gender_age():
         margin=dict(l=0, r=0, t=25, b=0),
         font=dict(
             family='Inter',
-            color='#FFFFFF',
+            color=Colors.white,
         ),
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor=Colors.transparent,
+        plot_bgcolor=Colors.transparent,
     )
 
     return fig
