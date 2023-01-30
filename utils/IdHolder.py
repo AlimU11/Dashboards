@@ -1,4 +1,6 @@
-from .StrEnum import StrEnum, auto
+from enum import auto
+
+from .StrEnum import StrEnum
 
 
 class IdHolder(StrEnum):

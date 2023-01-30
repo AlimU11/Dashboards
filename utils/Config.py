@@ -36,14 +36,14 @@ class Config(BaseSettings):
         ),
     ]
 
-    vg_data_path: str = 'data/vgsales.csv'
+    vg_data_path: str = 'https://raw.githubusercontent.com/AlimU11/Dashboards/master/data/vgsales.csv'
     vg_default_top_n_publishers: int = 5
     vg_default_top_n_games: int = 10
 
-    hr_data_path: str = 'data/HR Data.csv'
+    hr_data_path: str = 'https://raw.githubusercontent.com/AlimU11/Dashboards/master/data/HR%20data.csv'
     hr_default_bin_size: int = 3
 
-    sp_data_path: str = 'data/sp Data.xlsx'
+    sp_data_path: str = 'https://github.com/AlimU11/Dashboards/blob/master/data/sp%20data.xlsx?raw=true'
     sp_default_total_advetisement: int = 5
 
 
