@@ -4,6 +4,14 @@
 
 Dashboards made with Plotly Dash.
 
+<br>
+
+Web App - https://dashboards.onrender.com
+
+*(deployment a little slow and buggy, and might require sometimes manual page reload)*
+
+<br>
+
 1. Video Game Sales - [https://www.kaggle.com/gregorut/videogamesales](https://www.kaggle.com/gregorut/videogamesales)
 
 ![vh](assets/previews/vg.png)
