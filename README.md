@@ -10,6 +10,11 @@ Web App - https://dashboards.onrender.com
 
 *(deployment a little slow and buggy, and might require sometimes manual page reload)*
 
+Local Run:
+```bash
+pip install -r requirements.txt && python app.py
+```
+
 <br>
 
 1. Video Game Sales - [https://www.kaggle.com/gregorut/videogamesales](https://www.kaggle.com/gregorut/videogamesales)
